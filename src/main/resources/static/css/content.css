@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+/* ----- 로그인 ----- */
+.center-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.center-container > * {
+    width: 300px;
+}
+
+.center-container > .oauth2-login-container {
+    margin: 20px;
+    padding: 20px;
+
+    box-sizing: border-box;
+    border: 1px solid;
+    border-radius: 12px;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.center-container > .oauth2-login-container > ul {
+    display: flex;
+    list-style: none;
+}
+
+.center-container > .oauth2-login-container > ul > li {
+    padding: 10px;
+}
+
+
+.center-container > .local-form-container {
+    margin: 20px;
+    padding: 20px;
+
+    box-sizing: border-box;
+    border: 1px solid;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.center-container > .local-form-container > .local-form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.center-container > .local-form-container > .local-form-box .form-submit-button {
+    flex: 1;
+}
+
+.local-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.local-form > * {
+    box-sizing: border-box;
+    margin : 2px;
+}
+
+/* ----- 테이블 스타일 ----- */
+.tb {
+    width: 100%;
+    border: 1px solid #dedede;
+    margin-top: 20px;
+}
+
+.tb:first-child {
+    margin-top: 0;
+}
+
+.tb th, .tb td {
+    border: 1px solid #dedede;
+    padding: 10px 5px;
+    box-sizing: border-box;
+}
+
+.tb th {
+    color: #555;
+}
+
+.tb_col th {
+    border-bottom: 1px solid #a2a2a2;
+}
+
+.tb_col td {
+    text-align: center;
+}
+
+.tb_col thead th {
+    background: #6f8294;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.tb_col tbody tr:nth-child(even) {
+    background: #f6f7f8;
+}
+
+.tb_col .no_data_msg {
+    padding: 50px 0;
+}
+
+.tb_row {
+    border-top: 2px solid #6f8294;
+}
+
+.tb_row th, .tb_row td {
+    padding: 8px 12px;
+}
+
+.tb_row th {
+    background: #f6f7f8;
+    text-align: left;
+}
+
+.tb_row td {
+    height: 40px;
+}
+
+.tb_row .btns {
+    height: 38px;
+    line-height: 38px;
+}
+
+/* ----- 페이지네이션 ----- */
+.pagination * {
+    box-sizing: border-box;
+}
+
+.pagination {
+    text-align: center;
+    margin: 2%;
+}
+
+.pagination > ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination > ul > li {
+    display: flex;
+    margin: 0 4px;
+}
+
+.pagination > ul > li > a {
+    margin-left: -1px;
+}
+
+.pagination a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px; /* 최소 너비 */
+    height: 30px;
+    line-height: 240%;
+    color: #999;
+    font-size: 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    box-sizing: content-box; /* 내용에 따라 크기 조절 */
+}
+
+.pagination a:hover {
+    background: #f7f7f7;
+}
+
+.pagination li.active {
+    font-weight: bold;
+    background: #666;
+    border-color: transparent;
+    border-radius: 4px;
+    color: #fff;
+}
+/* 현재 페이지 버튼에 hover 스타일을 제외 */
+.pagination li.active a:hover {
+    background: none;
+}
+
+/* ----- search ----- */
+.member-search {
+    box-sizing: border-box;
+}
+
+.search_box {
+    display:flex;
+    box-sizing: border-box;
+    background: #f7f8fa;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 2px 0px rgba(80, 80, 80, 0.05);
+    padding: 10px 20px;
+    overflow: hidden;
+}
+
+.search_box input[type="text"], .search_box select, .search_box button {
+    height: 34px;
+}
+
+.search_box input[type="text"], .search_box select {
+    width: auto;
+    padding: 4px 5px;
+    border: 1px solid #ddd;
+}
+
+.search_box input[type="text"] {
+    width: 170px;
+}
+
+
+.bt_search {
+    margin-left: auto;
+
+    background: #586a7d;
+    border: 0;
+    padding: 0;
+    color: #fff;
+    font-weight: bold;
+    width: 42px;
+    line-height: 34px;
+    border-radius: 3px;
+    vertical-align: center;
+    position: relative;
+}

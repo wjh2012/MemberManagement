@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="member-search" class="member-search">
+
+  <div class="search_box">
+
+    <form id="searchForm" onsubmit="return false;" autocomplete="off">
+
+      <div class="sch_group">
+
+        <select id="isOauth" name="isOauth" title="oauth 여부">
+          <option value="">oauth 여부</option>
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+
+        <select id="authType" name="authType" title="로그인 타입">
+          <option value="">로그인 타입</option>
+          <option value="Local">Local</option>
+          <option value="naver">naver</option>
+          <option value="kakao">kakao</option>
+          <option value="google">google</option>
+          <option value="github">github</option>
+        </select>
+
+        <select id="role" name="role" title="role 선택">
+          <option value="">role 선택</option>
+          <option value="USER">USER</option>
+          <option value="MANAGER">MANAGER</option>
+          <option value="ADMIN">ADMIN</option>
+        </select>
+
+        <input type="text" id="nickname" name="nickname" placeholder="닉네임 검색" title="닉네임 검색" />
+
+        <select id="pageSize" name="pageSize" title="갯수">
+          <option value="10">10개씩 보기</option>
+          <option value="20">20개씩 보기</option>
+          <option value="50">50개씩 보기</option>
+        </select>
+
+        <button type="button" class="bt_search" onclick="submitForm(1);">
+          검색
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+</html>

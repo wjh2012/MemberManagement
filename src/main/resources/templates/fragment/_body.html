@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body th:fragment="body">
+
+<header th:replace="~{/fragment/_header :: header}"></header>
+<nav th:replace="~{/fragment/_nav :: nav}"></nav>
+
+<section layout:fragment="content">
+    <p>Page content goes here</p>
+</section>
+
+
+</body>
+
+</html>

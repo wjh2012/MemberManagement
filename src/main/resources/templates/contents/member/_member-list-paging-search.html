@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="member-list-paging-search">
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" th:src="@{/js/pagination.js}"></script>
+    <script type="text/javascript" th:src="@{/js/memberSearch.js}"></script>
+    <script type="text/javascript" th:src="@{/js/memberList.js}"></script>
+
+    <div th:replace="~{/contents/member/_member-search :: member-search}"></div>
+    <div class="pagination"></div>
+    <div th:replace="~{/contents/member/_member-list :: member-list}"></div>
+
+    <script th:inline="javascript">
+        window.onload = () => {
+            submitForm(1);
+        }
+    </script>
+
+</div>
+
+</html>

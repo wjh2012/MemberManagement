@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title layout:fragment="title">
+        memberList
+    </title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+    <div th:replace="~{/contents/member/_member-list-paging-search :: member-list-paging-search}"></div>
+</section>
+
+</body>
+
+</html>

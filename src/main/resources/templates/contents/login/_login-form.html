@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="login-form" class="local-form-container">
+
+    <h2>Local 계정 로그인</h2>
+
+    <div class="local-form-box">
+
+        <form class="local-form" id="login-form" th:action="@{/login}" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autofocus="autofocus" th:required="true"/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" th:required="true"/>
+
+            <button class="form-submit-button" form="login-form" type="submit">Login</button>
+        </form>
+
+    </div>
+
+</div>
+</html>

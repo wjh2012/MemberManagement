@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<header th:fragment="header">
+    <div class="container">
+        <div>
+            <a th:href="@{/}"><h1>Basic Auth</h1></a>
+        </div>
+
+        <div th:replace="~{/fragment/header/_is-authenticated-member :: is-authenticated}"></div>
+    </div>
+</header>
+
+
+</html>
+
+

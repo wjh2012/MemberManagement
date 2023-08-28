@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="myInfo">
+    <h4>hello</h4>
+
+    Authenticated username:
+    <p sec:authentication="name"></p>
+    Authenticated user roles:
+    <p sec:authentication="principal.authorities"></p>
+
+    <ul>
+        <li><a href="/member/oauth2">hasAuthority : OAUTH2_USER ONLY</a></li>
+        <li><a href="/member/oidc">hasAuthority : OIDC_USER ONLY</a></li>
+        <li><a href="/member/role">hasRole : USER ONLY</a></li>
+        <li><a href="/test">...</a></li>
+    </ul>
+
+    <a href="/logout">로그아웃</a>
+</div>
+
+</html>
