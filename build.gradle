@@ -73,3 +73,7 @@ compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
 // queryDSL 추가 끝
+
+bootJar {
+    archiveFileName = 'app.jar'
+}
