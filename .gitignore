@@ -5,3 +5,5 @@
 /out/production/classes/
 /out/test/classes/
 /src/main/generated/
+
+/src/main/resources/application.yml
