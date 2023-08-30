@@ -45,7 +45,7 @@ function createPaginationLink(page, label) {
     anchor.setAttribute('role', 'button');
     anchor.innerText = label;
     anchor.href = '#';
-    anchor.onclick = function() {
+    anchor.onclick = function () {
         submitForm(page)
     };
     return anchor;

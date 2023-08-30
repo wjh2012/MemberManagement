@@ -8,7 +8,7 @@
     color: inherit;
 }
 
-html{
+html {
     height: 100%;
 }
 
@@ -18,15 +18,15 @@ header > .container {
     align-items: center;
 }
 
-header > .container h1{
-    margin-left : 10px;
+header > .container h1 {
+    margin-left: 10px;
 }
 
-header > .container > .is-authenticated > ul{
+header > .container > .is-authenticated > ul {
     display: flex;
 }
 
-header > .container > .is-authenticated > ul li{
+header > .container > .is-authenticated > ul li {
     padding: 10px;
 }
 
@@ -37,7 +37,7 @@ nav > .container {
     background: #4c555e;
     font-size: 28px;
 
-    color:white;
+    color: white;
 }
 
 nav > .container > ul {

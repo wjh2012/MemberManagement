@@ -1,0 +1,25 @@
+services:
+  myshop_authz_server:
+    image: ggomg/myshop_authz:latest
+    ports:
+      - 8010:8010
+
+  myshop_authz_db:
+    image: mysql:latest
+    ports:
+      - 8020:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 11111111
+      MYSQL_DATABASE: userAuth
+      MYSQL_USER: myshop_authz_server
+      MYSQL_PASSWORD: 00000000
+    volumes:
+      - authz_mysql_data:/var/lib/mysql
+
+  myshop_authz_redis:
+    image: redis:latest
+    ports:
+      - 8030:6379
+
+volumes:
+  authz_mysql_data:

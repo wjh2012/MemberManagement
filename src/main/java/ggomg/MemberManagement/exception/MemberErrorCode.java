@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum MemberErrorCode implements ErrorCode{
+public enum MemberErrorCode implements ErrorCode {
     LOGIN_FAIL(101, "로그인 실패"),
 
     REGISTER_FAIL_USERNAME_LENGTH(211, "아이디는 5자 이상 17자 이하여야 합니다."),

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 
-<div th:fragment="login-form" class="local-form-container">
+<div class="local-form-container" th:fragment="login-form">
 
     <h2>Local 계정 로그인</h2>
 
     <div class="local-form-box">
 
-        <form class="local-form" id="login-form" th:action="@{/login}" method="post">
+        <form class="local-form" id="login-form" method="post" th:action="@{/login}">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" autofocus="autofocus" th:required="true"/>
+            <input autofocus="autofocus" id="username" name="username" th:required="true" type="text"/>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" th:required="true"/>
+            <input id="password" name="password" th:required="true" type="password"/>
 
             <button class="form-submit-button" form="login-form" type="submit">Login</button>
         </form>

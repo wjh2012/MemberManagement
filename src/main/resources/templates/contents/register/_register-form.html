@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>>
 
-<div th:fragment="register_form" class="local-form-container">
+<div class="local-form-container" th:fragment="register_form">
 
     <h2>Local 계정 가입</h2>
 
     <div class="local-form-box">
 
-        <form class="local-form" id="register-form" th:action="@{/register/local}" method="post">
+        <form class="local-form" id="register-form" method="post" th:action="@{/register/local}">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" th:required="true">
+            <input id="username" name="username" th:required="true" type="text">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" th:required="true">
+            <input id="password" name="password" th:required="true" type="password">
             <label for="password">닉네임</label>
-            <input type="text" id="nickname" name="nickname" th:required="true">
+            <input id="nickname" name="nickname" th:required="true" type="text">
             <button class="register-form-submit-button" form="register-form" type="submit">Login</button>
         </form>
 

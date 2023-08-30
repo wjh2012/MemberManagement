@@ -70,7 +70,7 @@
 
 .local-form > * {
     box-sizing: border-box;
-    margin : 2px;
+    margin: 2px;
 }
 
 /* ----- 테이블 스타일 ----- */
@@ -190,6 +190,7 @@
     border-radius: 4px;
     color: #fff;
 }
+
 /* 현재 페이지 버튼에 hover 스타일을 제외 */
 .pagination li.active a:hover {
     background: none;
@@ -201,7 +202,7 @@
 }
 
 .search_box {
-    display:flex;
+    display: flex;
     box-sizing: border-box;
     background: #f7f8fa;
     border: 1px solid #cfcfcf;

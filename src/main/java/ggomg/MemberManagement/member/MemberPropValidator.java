@@ -36,7 +36,7 @@ public class MemberPropValidator {
     }
 
     private static void NoSpace(String username) {
-        if (!username.equals(username.replaceAll(" ",  ""))) {
+        if (!username.equals(username.replaceAll(" ", ""))) {
             throw new IllegalArgumentException("could not include space");
         }
     }
