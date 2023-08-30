@@ -2,9 +2,8 @@ name: Deploy
 run-name: ${{ github.actor }} is running out GitHub Actions 🚀
 
 on:
-  push
-  # release:
-  #   types: [created]
+  release:
+    types: [created]
 
 jobs:
   build:
