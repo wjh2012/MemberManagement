@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: 'corretto'
           server-id: github
           settings-path: ${{ github.workspace }}
 
@@ -49,3 +49,21 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/mysite:latest
+
+
+      - name: Copy file via ssh password
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.MYSITE_USERNAME }}
+          password: ${{ secrets.MYSITE_PASSWORD }}
+          source: "docker-compose.yml, runApp.sh"
+          target: /home/${{ secrets.MYSITE_USERNAME }}
+
+      - name: Run App in docker
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.MYSITE_USERNAME }}
+          password: ${{ secrets.MYSITE_PASSWORD }}
+          script: sh runApp.sh
