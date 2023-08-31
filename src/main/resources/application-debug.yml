@@ -1,0 +1,33 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  thymeleaf:
+    cache: false
+    check-template-location: true
+
+  devtools:
+    livereload:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.security: error
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  thymeleaf:
+    cache: false
+    check-template-location: true
+
+  devtools:
+    livereload:
+      enabled: false
+
