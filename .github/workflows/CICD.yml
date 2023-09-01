@@ -54,9 +54,6 @@ jobs:
           tags: ${{ vars.DOCKERHUB_USERNAME }}/mysite:latest
 
 
-      - name: Run Docker Compose
-        run: |
-          DOCKER_HOST = "ssh://ec2-user@ggomg.duckdns.org" docker-compose up -d
       # - name: Copy file via ssh password
       #   uses: appleboy/scp-action@v0.1.4
       #   with:
@@ -66,10 +63,10 @@ jobs:
       #     source: "docker-compose.yml"
       #     target: /home/ec2-user
           
-      # - name: Run App in docker
-      #   uses: appleboy/ssh-action@v1.0.0
-      #   with:
-      #     host: ${{ secrets.MYSITE_HOST }}
-      #     username: ${{ secrets.MYSITE_USERNAME }}
-      #     password: ${{ secrets.MYSITE_PASSWORD }}
-      #     script: sh runApp.sh
+      - name: Run App in docker
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.MYSITE_HOST }}
+          username: ${{ secrets.MYSITE_USERNAME }}
+          password: ${{ secrets.MYSITE_PASSWORD }}
+          script: whoami
