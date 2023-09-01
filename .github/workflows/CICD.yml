@@ -18,7 +18,7 @@ jobs:
         with:
           host: ${{ vars.MYSITE_HOST }}
           username: ${{ vars.MYSITE_USERNAME }}
-          password: ${{ secrets.EC2_PASSWORD }}
+          key: ${{ secrets.EC2_PASSWORD }}
           script: ls
     
       - name: checkout
