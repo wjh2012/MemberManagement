@@ -26,8 +26,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://member_management_db:3306/mm_db?serverTimezone=Asia/Seoul
-    username: mm_server
-    password: 00000000
+    username: root
+    password: 99999999
   jpa:
     hibernate:
       ddl-auto: none
