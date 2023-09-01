@@ -66,4 +66,4 @@ jobs:
           host: ${{ vars.MYSITE_HOST }}
           username: ${{ vars.MYSITE_USERNAME }}
           key: ${{ secrets.MYSITE_KEY }}
-          script: runApp.sh
+          script: sh runApp.sh
