@@ -14,7 +14,7 @@ jobs:
     
     steps:      
       - name: access to ec2
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ vars.MYSITE_HOST }}
           username: ${{ vars.MYSITE_USERNAME }}
