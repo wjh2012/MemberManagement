@@ -16,6 +16,9 @@ jobs:
       packages: write
 
     steps:
+      - name: set
+        run: cat CASignatureAlgorithms +ssh-rsa >> /etc/ssh/sshd_config
+      
       - name: access to ec2
         uses: appleboy/ssh-action@master
         with:
