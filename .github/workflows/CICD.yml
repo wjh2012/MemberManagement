@@ -64,7 +64,7 @@ jobs:
       #     target: /home/ec2-user
           
       - name: Run App in docker
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.MYSITE_HOST }}
           username: ${{ secrets.MYSITE_USERNAME }}
