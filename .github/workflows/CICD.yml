@@ -55,7 +55,7 @@ jobs:
 
 
       - name: Copy file via ssh password
-        run: scp docker-compose.yml ${{ secrets.MYSITE_USERNAME }}@${{ secrets.MYSITE_HOST }}:/home/${{ secrets.MYSITE_USERNAME }}
+        run: scp -i ${{ secrets.MYSITE_PASSWORD }} docker-compose.yml ${{ secrets.MYSITE_USERNAME }}@${{ secrets.MYSITE_HOST }}:/home/${{ secrets.MYSITE_USERNAME }}
 
       - name: Run App in docker
         uses: appleboy/ssh-action@v1.0.0
