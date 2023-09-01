@@ -16,6 +16,14 @@ jobs:
       packages: write
 
     steps:
+      - name: access to ec2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.MYSITE_HOST }}
+          username: ${{ secrets.MYSITE_USERNAME }}
+          password: ${{ secrets.MYSITE_PASSWORD }}
+          script: whoami
+    
       - name: checkout
         uses: actions/checkout@v3
 
@@ -63,10 +71,10 @@ jobs:
       #     source: "docker-compose.yml"
       #     target: /home/ec2-user
           
-      - name: Run App in docker
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.MYSITE_HOST }}
-          username: ${{ secrets.MYSITE_USERNAME }}
-          password: ${{ secrets.MYSITE_PASSWORD }}
-          script: whoami
+      # - name: Run App in docker
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.MYSITE_HOST }}
+      #     username: ${{ secrets.MYSITE_USERNAME }}
+      #     password: ${{ secrets.MYSITE_PASSWORD }}
+      #     script: rumApp.sh
