@@ -16,10 +16,10 @@ jobs:
       - name: access to ec2
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.MYSITE_HOST }}
-          username: ${{ secrets.MYSITE_USERNAME }}
-          password: ${{ secrets.MYSITE_PASSWORD }}
-          script: whoami
+          host: ${{ vars.MYSITE_HOST }}
+          username: ${{ var.MYSITE_USERNAME }}
+          password: ${{ secrets.EC2_PASSWORD }}
+          script: ls -al
     
       - name: checkout
         uses: actions/checkout@v3
