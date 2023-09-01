@@ -17,9 +17,9 @@ jobs:
 
     steps:
       - name: asdf
-        run: /etc/ssh/sshd_config
+        run: cat /etc/ssh/sshd_config
       - name: asdf
-        run: /etc/ssh/sshd_config.d/
+        run: cat /etc/ssh/sshd_config.d/
     
       - name: access to ec2
         uses: appleboy/ssh-action@master
