@@ -11,10 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
+    
     steps:
       - name: set
         run: cat CASignatureAlgorithms +ssh-rsa >> /etc/ssh/sshd_config
