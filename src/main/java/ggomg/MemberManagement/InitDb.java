@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@Profile("!test")
+@Profile("dev")
 public class InitDb {
 
     private final MemberService memberService;
