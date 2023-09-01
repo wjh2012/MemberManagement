@@ -12,15 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
-    steps:      
-      - name: access to ec2
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ vars.MYSITE_HOST }}
-          username: ${{ vars.MYSITE_USERNAME }}
-          key: ${{ secrets.EC2_PASSWORD }}
-          script: ls
-    
+    steps: 
       - name: checkout
         uses: actions/checkout@v3
 
@@ -59,19 +51,19 @@ jobs:
           tags: ${{ vars.DOCKERHUB_USERNAME }}/mysite:latest
 
 
-      # - name: Copy file via ssh password
-      #   uses: appleboy/scp-action@v0.1.4
-      #   with:
-      #     host: ggomg.duckdns.org
-      #     username: ec2-user
-      #     password: ${{ secrets.MYSITE_PASSWORD }}
-      #     source: "docker-compose.yml"
-      #     target: /home/ec2-user
+      - name: Copy file via ssh password
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ vars.MYSITE_HOST }}
+          username: ${{ vars.MYSITE_USERNAME }}
+          key: ${{ secrets.MYSITE_KEY }}
+          source: "docker-compose.yml, runApp.sh"
+          target: /home/ec2-user
           
-      # - name: Run App in docker
-      #   uses: appleboy/ssh-action@v1.0.0
-      #   with:
-      #     host: ${{ secrets.MYSITE_HOST }}
-      #     username: ${{ secrets.MYSITE_USERNAME }}
-      #     password: ${{ secrets.MYSITE_PASSWORD }}
-      #     script: rumApp.sh
+      - name: Run App in docker
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ vars.MYSITE_HOST }}
+          username: ${{ vars.MYSITE_USERNAME }}
+          key: ${{ secrets.MYSITE_KEY }}
+          script: runApp.sh
