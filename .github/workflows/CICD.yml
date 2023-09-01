@@ -12,12 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
-    steps:
-      - name: set
-        run: cat CASignatureAlgorithms +ssh-rsa >> /etc/ssh/sshd_config
-      
+    steps:      
       - name: access to ec2
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.MYSITE_HOST }}
           username: ${{ secrets.MYSITE_USERNAME }}
@@ -72,7 +69,7 @@ jobs:
       #     target: /home/ec2-user
           
       # - name: Run App in docker
-      #   uses: appleboy/ssh-action@master
+      #   uses: appleboy/ssh-action@v1.0.0
       #   with:
       #     host: ${{ secrets.MYSITE_HOST }}
       #     username: ${{ secrets.MYSITE_USERNAME }}
