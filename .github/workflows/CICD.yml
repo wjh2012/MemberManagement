@@ -17,7 +17,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ vars.MYSITE_HOST }}
-          username: ${{ var.MYSITE_USERNAME }}
+          username: ${{ vars.MYSITE_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
           script: ls -al
     
