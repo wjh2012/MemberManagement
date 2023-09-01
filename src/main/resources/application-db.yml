@@ -25,7 +25,7 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mm_db:3306/userAuth?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://member_management_db:3306/mm_db?serverTimezone=Asia/Seoul
     username: mm_server
     password: 00000000
   jpa:
