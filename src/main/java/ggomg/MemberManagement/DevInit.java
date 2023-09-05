@@ -30,6 +30,7 @@ public class DevInit {
             memberService.joinLocalMember(new LocalMemberRegisterRequest("admin", "admin", "admin"));
             memberService.joinLocalMember(new LocalMemberRegisterRequest("manager", "manager", "manager"));
             memberService.joinLocalMember(new LocalMemberRegisterRequest("member", "member", "member"));
+            memberService.joinLocalMember(new LocalMemberRegisterRequest("member2", "member2", "member2"));
 
             Member admin = memberRepository.findByUsername("admin").orElseThrow();
             Member manager = memberRepository.findByUsername("manager").orElseThrow();
