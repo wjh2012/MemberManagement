@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.member;
+package ggomg.MemberManagement.member.utils;
 
 public class MemberPropValidator {
 

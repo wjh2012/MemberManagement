@@ -1,8 +1,8 @@
 package ggomg.MemberManagement.member;
 
-import static ggomg.MemberManagement.member.MemberPropValidator.validateNickname;
-import static ggomg.MemberManagement.member.MemberPropValidator.validatePassword;
-import static ggomg.MemberManagement.member.MemberPropValidator.validateUsername;
+import static ggomg.MemberManagement.member.utils.MemberPropValidator.validateNickname;
+import static ggomg.MemberManagement.member.utils.MemberPropValidator.validatePassword;
+import static ggomg.MemberManagement.member.utils.MemberPropValidator.validateUsername;
 
 import ggomg.MemberManagement.controller.DTO.request.LocalMemberRegisterRequest;
 import ggomg.MemberManagement.controller.DTO.request.MemberSearchRequest;
@@ -33,7 +33,7 @@ public class MemberService {
         String nickname = localMemberRegisterRequest.getNickname();
 
         if (memberRepository.existsByUsername(username)) {
-            throw new IllegalArgumentException("already exist");
+            throw new IllegalArgumentException("username [[ " + username + " ]] already exist");
         }
 
         validateUsername(username);
