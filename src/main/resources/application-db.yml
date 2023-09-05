@@ -30,15 +30,16 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://member_management_db:3306/mm_db?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://member_management_db:3306/mm_db?useSSL=false?serverTimezone=Asia/Seoul
     username: root
     password: 99999999
   jpa:
-    hibernate:
-      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+
   flyway:
     enabled: true
     baseline-on-migrate: true
