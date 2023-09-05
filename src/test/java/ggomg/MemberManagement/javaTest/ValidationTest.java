@@ -1,6 +1,9 @@
 package ggomg.MemberManagement.javaTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -67,17 +70,19 @@ public class ValidationTest {
     @Test
     void fail_space_last() {
         String testString = "afdR ";
-        assertNotEquals(testString.replaceAll(" ",  "") , testString);
+        assertNotEquals(testString.replaceAll(" ", ""), testString);
     }
+
     @Test
     void fail_space_first() {
         String testString = " afdR";
-        assertNotEquals(testString.replaceAll(" ",  ""), testString);
+        assertNotEquals(testString.replaceAll(" ", ""), testString);
     }
+
     @Test
     void fail_space_middle() {
         String testString = "af dR";
-        assertNotEquals(testString.replaceAll(" ",  ""), testString);
+        assertNotEquals(testString.replaceAll(" ", ""), testString);
     }
 
     @Test
@@ -86,12 +91,14 @@ public class ValidationTest {
         String testString = "한he글1";
         assertTrue(testString.matches(regularExpressions));
     }
+
     @Test
     void fail_Kor_En_Num_Only_space() {
         String regularExpressions = "^[가-힣a-zA-Z0-9]*$";
         String testString = "한he 글1";
         assertFalse(testString.matches(regularExpressions));
     }
+
     @Test
     void fail_Kor_En_Num_Only_special() {
         String regularExpressions = "^[가-힣a-zA-Z0-9]*$";
