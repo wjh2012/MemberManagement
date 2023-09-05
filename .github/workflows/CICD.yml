@@ -65,3 +65,6 @@ jobs:
           username: ${{ vars.MYSITE_USERNAME }}
           key: ${{ secrets.MYSITE_KEY }}
           script: sh runApp.sh
+
+      - name: Prune Docker
+        run: docker system prune -a --volumes -f
