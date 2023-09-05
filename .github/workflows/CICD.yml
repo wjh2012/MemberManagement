@@ -21,8 +21,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'corretto'
-          server-id: github
-          settings-path: ${{ github.workspace }}
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
