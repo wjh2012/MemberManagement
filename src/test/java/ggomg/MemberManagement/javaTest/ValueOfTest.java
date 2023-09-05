@@ -5,12 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import ggomg.MemberManagement.role.RoleName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
-@Transactional
 public class ValueOfTest {
 
     @Test
