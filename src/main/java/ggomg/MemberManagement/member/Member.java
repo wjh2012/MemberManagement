@@ -50,7 +50,6 @@ public class Member {
     @CreatedDate
     private LocalDateTime createdDatetime;
 
-    @Builder.Default
     @BatchSize(size = 50)
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<MemberRole> memberRoles = new ArrayList<>();
