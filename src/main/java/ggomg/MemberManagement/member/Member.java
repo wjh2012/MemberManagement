@@ -52,6 +52,7 @@ public class Member {
 
     @BatchSize(size = 50)
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
     private List<MemberRole> memberRoles = new ArrayList<>();
 
     public static Member createByUsernamePassword(LocalMemberRegisterEssentials localMemberRegisterEssentials) {
