@@ -12,13 +12,13 @@ spring:
           kakao:
             scope:
               - openid
-            redirect-uri: http://ggomg.duckdns.org/login/oauth2/code/kakao
+            redirect-uri: https://ggomg.net/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
             client-id: 2e457d5bc429ed4b1b00a234e0acfc2f
             client-secret: u3d8x1I5jbYI8zPD6Q3s4qG8bp6Dvjm3
           naver:
-            redirect-uri: http://ggomg.duckdns.org/login/oauth2/code/naver
+            redirect-uri: https://ggomg.net/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_basic
             client-name: Naver
