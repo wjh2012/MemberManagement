@@ -3,7 +3,7 @@ services:
     container_name: MM_SERVER
     image: ggomg/mysite:latest
     ports:
-      - 443:8080
+      - 80:8080
 
   member_management_db:
     container_name: MM_DB
