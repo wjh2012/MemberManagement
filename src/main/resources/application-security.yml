@@ -4,9 +4,11 @@ spring:
       client:
         registration:
           google:
+            redirect-uri: https://ggomg.net/login/oauth2/code/google
             client-id: 896670349972-3ov2qlo4kk9enln0nomnje2lkmmsrdh4.apps.googleusercontent.com
             client-secret: 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
           github:
+            redirect-uri: https://ggomg.net/login/oauth2/code/github
             client-id: 844a386b0e59266a047e
             client-secret: 761c67c2b90d5be8415e105f534b7ce220445f1b
           kakao:
