@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.role;
+package ggomg.MemberManagement.team;
 
 import ggomg.MemberManagement.member.Member;
 import jakarta.persistence.Entity;
@@ -6,44 +6,30 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class MemberRole {
-
+public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn
-    private Member member;
+    private String name;
 
-    @ManyToOne
-    @JoinColumn
-    private Role role;
+    @OneToMany
+    private List<Member> members = new ArrayList<>();
 
-    @CreatedDate
-    private LocalDateTime createdDatetime;
-
-    public static MemberRole of(Member member, Role role) {
-        MemberRole memberRole = new MemberRole();
-        memberRole.member = member;
-        memberRole.role = role;
-        return memberRole;
-    }
 }

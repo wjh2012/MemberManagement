@@ -1,11 +1,11 @@
 package ggomg.MemberManagement.member;
 
-import static ggomg.MemberManagement.member.utils.MemberPropValidator.validateNickname;
-import static ggomg.MemberManagement.member.utils.MemberPropValidator.validatePassword;
-import static ggomg.MemberManagement.member.utils.MemberPropValidator.validateUsername;
+import static ggomg.MemberManagement.exception.RegisterErrorCode.REGISTER_FAIL_DUPLICATED_NICKNAME;
+import static ggomg.MemberManagement.exception.RegisterErrorCode.REGISTER_FAIL_DUPLICATED_USERNAME;
 
 import ggomg.MemberManagement.controller.DTO.request.LocalMemberRegisterRequest;
 import ggomg.MemberManagement.controller.DTO.request.MemberSearchRequest;
+import ggomg.MemberManagement.exception.RegistrationException;
 import ggomg.MemberManagement.member.DTO.LocalMemberRegisterEssentials;
 import ggomg.MemberManagement.member.DTO.MemberSearchCondition;
 import ggomg.MemberManagement.role.RoleName;
@@ -26,6 +26,7 @@ public class MemberService {
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     public Long joinLocalMember(LocalMemberRegisterRequest localMemberRegisterRequest) {
 
         String username = localMemberRegisterRequest.getUsername();
@@ -33,23 +34,15 @@ public class MemberService {
         String nickname = localMemberRegisterRequest.getNickname();
 
         if (memberRepository.existsByUsername(username)) {
-            throw new IllegalArgumentException("username [[ " + username + " ]] already exist");
+            throw new RegistrationException(REGISTER_FAIL_DUPLICATED_USERNAME);
         }
-
-        validateUsername(username);
-        validatePassword(password);
-        validateNickname(nickname);
-
+        if (memberRepository.existsByNickname(nickname)) {
+            throw new RegistrationException(REGISTER_FAIL_DUPLICATED_NICKNAME);
+        }
         String encryptedPassword = bCryptPasswordEncoder.encode(password);
 
-        LocalMemberRegisterEssentials localMemberRegisterEssentials =
-                new LocalMemberRegisterEssentials(
-                        username,
-                        encryptedPassword,
-                        nickname
-                );
-
-        Member member = Member.createByUsernamePassword(localMemberRegisterEssentials);
+        Member member = Member.createByUsernamePassword(
+                LocalMemberRegisterEssentials.of(username, encryptedPassword, nickname));
 
         memberRepository.save(member);
         roleService.grantRole(member.getId(), RoleName.USER);
@@ -80,9 +73,6 @@ public class MemberService {
         return memberRepository.existsByOauthId(oauthId);
     }
 
-    public boolean isExistByUsername(String username) {
-        return memberRepository.existsByUsername(username);
-    }
 
     public Page<Member> searchMember(MemberSearchRequest memberSearchRequest) {
         MemberSearchCondition memberSearchCondition = memberSearchRequest.getMemberSearchCondition();

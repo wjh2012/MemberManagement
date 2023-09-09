@@ -1,18 +1,19 @@
 package ggomg.MemberManagement.member.DTO;
 
-import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class LocalMemberRegisterEssentials {
 
-    @NotNull
     private String username;
-    @NotNull
     private String encryptedPassword;
-    @NotNull
     private String nickname;
+
+    public static LocalMemberRegisterEssentials of(String username, String password, String nickname) {
+        return new LocalMemberRegisterEssentials(username, password, nickname);
+    }
 
 }

@@ -73,6 +73,14 @@
     margin: 2px;
 }
 
+#login-fail {
+    color: red;
+}
+
+#register-fail {
+    color: red;
+}
+
 /* ----- 테이블 스타일 ----- */
 .tb {
     width: 100%;

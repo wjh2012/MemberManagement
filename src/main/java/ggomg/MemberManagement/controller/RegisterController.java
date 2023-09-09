@@ -2,6 +2,7 @@ package ggomg.MemberManagement.controller;
 
 import ggomg.MemberManagement.controller.DTO.request.LocalMemberRegisterRequest;
 import ggomg.MemberManagement.member.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,14 +24,8 @@ public class RegisterController {
     }
 
     @PostMapping("/local")
-    public String register(LocalMemberRegisterRequest localMemberRegisterRequest) {
-
+    public String register(@Valid LocalMemberRegisterRequest localMemberRegisterRequest) {
         memberService.joinLocalMember(localMemberRegisterRequest);
         return "redirect:/";
-    }
-
-    @PostMapping("/local/name-check")
-    public boolean usernameCheck(String username) {
-        return memberService.isExistByUsername(username);
     }
 }

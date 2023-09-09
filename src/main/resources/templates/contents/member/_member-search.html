@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div class="member-search" th:fragment="member-search">
 
@@ -43,6 +43,8 @@
                     검색
                 </button>
 
+                <button onclick="addDummyRequest()" sec:authorize="hasAuthority('ADMIN')">더미 멤버 생성하기</button>
+                <button onclick="addDummysRequest()" sec:authorize="hasAuthority('ADMIN')">더미 멤버 50개 생성하기</button>
             </div>
 
         </form>

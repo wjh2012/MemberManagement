@@ -87,7 +87,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
         if (nickname == null) {
             return null;
         }
-        return member.nickname.eq(nickname);
+        return member.nickname.contains(nickname);
     }
 
     private BooleanExpression usernameEq(String username) {

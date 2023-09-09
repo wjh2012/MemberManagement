@@ -5,7 +5,6 @@ import ggomg.MemberManagement.member.MemberService;
 import ggomg.MemberManagement.role.RoleName;
 import ggomg.MemberManagement.role.RoleService;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class ProxyDefaultOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class ProxyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private static final String NAVER_CLIENT = "Naver";
     private final DefaultOAuth2UserService defaultOAuth2UserService;
@@ -29,7 +28,7 @@ public class ProxyDefaultOAuth2UserService implements OAuth2UserService<OAuth2Us
     private final RoleService roleService;
 
     @Autowired
-    public ProxyDefaultOAuth2UserService(MemberService memberService, RoleService roleService) {
+    public ProxyOAuth2UserService(MemberService memberService, RoleService roleService) {
         this.defaultOAuth2UserService = new DefaultOAuth2UserService();
         this.memberService = memberService;
         this.roleService = roleService;
@@ -40,7 +39,7 @@ public class ProxyDefaultOAuth2UserService implements OAuth2UserService<OAuth2Us
         log.info("***** load User *****");
         OAuth2User loadedUser = defaultOAuth2UserService.loadUser(userRequest);
 
-        Set<GrantedAuthority> authorities = new LinkedHashSet<>();
+        Set<GrantedAuthority> authorities;
         Map<String, Object> userAttributes;
         String userNameAttributeName;
 
@@ -66,12 +65,6 @@ public class ProxyDefaultOAuth2UserService implements OAuth2UserService<OAuth2Us
         authorities = roleService.buildUserAuthority(member.getId());
 
         return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
-    }
-
-    private void changeUserAttributeName(String oauthId, Map<String, Object> userAttributes,
-                                         String userNameAttributeName) {
-        Long MemberId = memberService.findByOAuthId(oauthId).getId();
-        userAttributes.replace(userNameAttributeName, MemberId);
     }
 }
 
