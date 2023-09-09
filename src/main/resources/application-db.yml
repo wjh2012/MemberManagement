@@ -34,9 +34,6 @@ spring:
     username: root
     password: 99999999
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: validate
 
