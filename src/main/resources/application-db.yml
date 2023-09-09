@@ -30,7 +30,7 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://MM_DB:3306/mm_db?serverTimezone=Asia/Seoul&useSSL=false
+    url: jdbc:mysql://mm_db:3306/mm_db?serverTimezone=Asia/Seoul&useSSL=false
     username: root
     password: 99999999
   jpa:
