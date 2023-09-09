@@ -22,9 +22,9 @@ CREATE TABLE role
 
 CREATE TABLE member_role
 (
-    id        BIGINT AUTO_INCREMENT,
-    member_id BIGINT,
-    role_id   BIGINT,
+    id         BIGINT AUTO_INCREMENT,
+    member_id  BIGINT,
+    role_id    BIGINT,
     grant_date datetime(6),
 
     PRIMARY KEY (id)
@@ -33,8 +33,8 @@ CREATE TABLE member_role
 
 CREATE TABLE team
 (
-    id        BIGINT AUTO_INCREMENT,
-    name VARCHAR(255),
+    id               BIGINT AUTO_INCREMENT,
+    team_name        VARCHAR(255),
     created_datetime datetime(6),
 
     PRIMARY KEY (id)
