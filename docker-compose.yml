@@ -1,10 +1,4 @@
 services:
-  member_management_server:
-    container_name: MM_SERVER
-    image: ggomg/mysite:latest
-    ports:
-      - 80:8080
-
   member_management_db:
     container_name: MM_DB
     image: mysql:latest
@@ -17,6 +11,14 @@ services:
       MYSQL_PASSWORD: 00000000
     volumes:
       - MMDB:/var/lib/mysql
+
+  member_management_server:
+    container_name: MM_SERVER
+    image: ggomg/mysite:latest
+    ports:
+      - 80:8080
+    depends_on:
+      - member_management_db
 
 volumes:
   MMDB:
