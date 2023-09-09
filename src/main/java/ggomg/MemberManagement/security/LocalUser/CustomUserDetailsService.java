@@ -21,8 +21,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberService.findByUsername(username);
-        return new User(member.getId().toString(), member.getPassword(),
-                roleService.buildUserAuthority(member.getId()));
+
+        try {
+            Member member = memberService.findByUsername(username);
+
+            return new User(member.getId().toString(), member.getPassword(),
+                    roleService.buildUserAuthority(member.getId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new UsernameNotFoundException("사용자를 검색하는 도중 예외 발생: " + username, e);
+        }
     }
 }

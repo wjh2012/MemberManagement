@@ -42,7 +42,7 @@ public class DevInit {
             roleService.grantRole(member.getId(), RoleName.MANAGER);
             roleService.grantRole(member.getId(), RoleName.ADMIN);
             roleService.revokeRole(member.getId(), RoleName.ADMIN);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

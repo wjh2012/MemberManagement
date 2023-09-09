@@ -2,8 +2,8 @@ package ggomg.MemberManagement.security.config;
 
 
 import ggomg.MemberManagement.security.OAuth2User.CustomAuthorizationRequestResolver;
-import ggomg.MemberManagement.security.OAuth2User.ProxyDefaultOAuth2UserService;
-import java.util.Collections;
+import ggomg.MemberManagement.security.OAuth2User.ProxyOAuth2UserService;
+import ggomg.MemberManagement.security.OAuth2User.ProxyOIDCUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -24,16 +22,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class CustomWebSecurityConfig {
 
     private final CustomAuthorizationRequestResolver customAuthorizationRequestResolver;
-    private final ProxyDefaultOAuth2UserService proxyDefaultOAuth2UserService;
-//    private final ProxyOIDCUserService proxyOIDCUserService;
-
-    @Bean
-    public OidcUserService oidcConfig() {
-        OidcUserService oidcUserService = new OidcUserService();
-        oidcUserService.setOauth2UserService(proxyDefaultOAuth2UserService);
-        oidcUserService.setAccessibleScopes(Collections.emptySet());
-        return oidcUserService;
-    }
+    private final ProxyOAuth2UserService proxyOAuth2UserService;
+    private final ProxyOIDCUserService oidcUserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -51,19 +41,19 @@ public class CustomWebSecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("username")
-                        .failureUrl("/error")
                         .defaultSuccessUrl("/")
+                        .failureUrl("/login?error=true")
                 )
                 .oauth2Login(login -> login
-                                .loginPage("/login")
-                                .authorizationEndpoint(authorize -> authorize
-                                        .authorizationRequestResolver(customAuthorizationRequestResolver)
-                                )
-                                .userInfoEndpoint(userInfo -> userInfo
-                                                .userService(proxyDefaultOAuth2UserService)
-//                                .oidcUserService(proxyOIDCUserService)
-                                )
-                                .defaultSuccessUrl("/")
+                        .loginPage("/login")
+                        .authorizationEndpoint(authorize -> authorize
+                                .authorizationRequestResolver(customAuthorizationRequestResolver)
+                        )
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(proxyOAuth2UserService)
+                                .oidcUserService(oidcUserService)
+                        )
+                        .defaultSuccessUrl("/")
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -73,9 +63,6 @@ public class CustomWebSecurityConfig {
                         .logoutSuccessUrl("/")
                 )
         ;
-
-        CommonOAuth2Provider commonOAuth2Provider;
-        OidcUserService oidcUserService;
 
         return http.build();
     }
