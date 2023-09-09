@@ -25,7 +25,6 @@ CREATE TABLE member_role
     id         BIGINT AUTO_INCREMENT,
     member_id  BIGINT,
     role_id    BIGINT,
-    grant_date datetime(6),
 
     PRIMARY KEY (id)
 );
