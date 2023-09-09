@@ -9,7 +9,7 @@ services:
     container_name: MM_DB
     image: mysql:latest
     ports:
-      - 3306:3306
+      - 8090:3306
     environment:
       MYSQL_ROOT_PASSWORD: 99999999
       MYSQL_DATABASE: mm_db
