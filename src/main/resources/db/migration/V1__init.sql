@@ -34,7 +34,7 @@ CREATE TABLE member_role
 CREATE TABLE team
 (
     id        BIGINT AUTO_INCREMENT,
-    team_name VARCHAR(255),
+    name VARCHAR(255),
     created_datetime datetime(6),
 
     PRIMARY KEY (id)
