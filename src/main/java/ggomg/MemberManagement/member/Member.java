@@ -3,6 +3,7 @@ package ggomg.MemberManagement.member;
 import ggomg.MemberManagement.member.DTO.LocalMemberRegisterEssentials;
 import ggomg.MemberManagement.role.MemberRole;
 import ggomg.MemberManagement.role.Role;
+import ggomg.MemberManagement.team.Team;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -54,6 +55,9 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<MemberRole> memberRoles = new ArrayList<>();
+
+    @OneToMany
+    private List<Team> teams = new ArrayList<>();
 
     public static Member createByUsernamePassword(LocalMemberRegisterEssentials localMemberRegisterEssentials) {
 
