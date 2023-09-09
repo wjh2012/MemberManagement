@@ -37,9 +37,6 @@ public class MemberRole {
     @JoinColumn
     private Role role;
 
-    @CreatedDate
-    private LocalDateTime grantDate;
-
     public static MemberRole of(Member member, Role role) {
         MemberRole memberRole = new MemberRole();
         memberRole.member = member;
