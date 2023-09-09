@@ -30,7 +30,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String teamName;
 
     @CreatedDate
     private LocalDateTime createdDatetime;
