@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@Profile("dev")
 public class DevInit {
 
     private final MemberService memberService;
@@ -30,7 +29,6 @@ public class DevInit {
             memberService.joinLocalMember(new LocalMemberRegisterRequest("admin", "admin", "admin"));
             memberService.joinLocalMember(new LocalMemberRegisterRequest("manager", "manager", "manager"));
             memberService.joinLocalMember(new LocalMemberRegisterRequest("member", "member", "member"));
-            memberService.joinLocalMember(new LocalMemberRegisterRequest("member2", "member2", "member2"));
 
             Member admin = memberRepository.findByUsername("admin").orElseThrow();
             Member manager = memberRepository.findByUsername("manager").orElseThrow();
@@ -43,7 +41,7 @@ public class DevInit {
             roleService.grantRole(member.getId(), RoleName.ADMIN);
             roleService.revokeRole(member.getId(), RoleName.ADMIN);
         } catch (Exception e) {
-            e.printStackTrace();
+            return;
         }
 
     }
