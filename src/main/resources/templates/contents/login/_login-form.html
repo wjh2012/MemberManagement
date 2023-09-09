@@ -18,5 +18,10 @@
 
     </div>
 
+    <!-- 실패 메시지를 표시할 팝업 -->
+    <div th:if="${param.error}">
+        <p id="login-fail">아이디 또는 비밀번호를 확인하세요.</p>
+    </div>
+
 </div>
 </html>
