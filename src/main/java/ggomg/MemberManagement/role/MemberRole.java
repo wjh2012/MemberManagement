@@ -38,7 +38,7 @@ public class MemberRole {
     private Role role;
 
     @CreatedDate
-    private LocalDateTime createdDatetime;
+    private LocalDateTime grantDate;
 
     public static MemberRole of(Member member, Role role) {
         MemberRole memberRole = new MemberRole();
