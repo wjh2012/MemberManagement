@@ -6,6 +6,13 @@ function drawList(list) {
         list.forEach(row => {
             const tr = document.createElement('tr');
 
+            const tdCheckbox = document.createElement('td');
+            const checkbox = document.createElement('input');
+            checkbox.className = 'subCheckbox'
+            checkbox.type = 'checkbox';
+            tdCheckbox.appendChild(checkbox);
+            tr.appendChild(tdCheckbox);
+
             const tdId = document.createElement('td');
             tdId.textContent = row.id;
             tr.appendChild(tdId);
