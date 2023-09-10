@@ -1,7 +1,6 @@
 package ggomg.MemberManagement.role;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -29,7 +28,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
-    @Column(unique = true)
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberRole> memberRoles = new ArrayList<>();
 

@@ -48,7 +48,7 @@ public class ProxyOIDCUserService implements OAuth2UserService<OidcUserRequest, 
                 .getUserNameAttributeName();
         String oauthId = userAttributes.get(userNameAttributeName).toString();
 
-        if (!memberService.isExistByOAuthId(oauthId)) {
+        if (!memberService.isExistByOauthId(oauthId)) {
             Long memberId = memberService.joinOAuth2Member(clientName, oauthId);
             roleService.grantRole(memberId, RoleName.USER);
         }

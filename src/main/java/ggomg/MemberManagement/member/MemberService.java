@@ -39,6 +39,7 @@ public class MemberService {
         if (memberRepository.existsByNickname(nickname)) {
             throw new RegistrationException(REGISTER_FAIL_DUPLICATED_NICKNAME);
         }
+
         String encryptedPassword = bCryptPasswordEncoder.encode(password);
 
         Member member = Member.createByUsernamePassword(
@@ -69,7 +70,7 @@ public class MemberService {
         return memberRepository.findByOauthId(oauthId).orElseThrow();
     }
 
-    public boolean isExistByOAuthId(String oauthId) {
+    public boolean isExistByOauthId(String oauthId) {
         return memberRepository.existsByOauthId(oauthId);
     }
 
@@ -83,4 +84,5 @@ public class MemberService {
                 );
         return memberRepository.MemberSearchWithPage(memberSearchCondition, pageRequest);
     }
+
 }
