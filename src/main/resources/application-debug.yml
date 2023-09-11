@@ -13,7 +13,7 @@ spring:
 
 logging:
   level:
-    org.springframework.security: trace
+    org.springframework.security: error
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
 

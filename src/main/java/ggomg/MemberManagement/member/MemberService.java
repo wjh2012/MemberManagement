@@ -26,7 +26,6 @@ public class MemberService {
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     public Long joinLocalMember(LocalMemberRegisterRequest localMemberRegisterRequest) {
 
         String username = localMemberRegisterRequest.getUsername();
