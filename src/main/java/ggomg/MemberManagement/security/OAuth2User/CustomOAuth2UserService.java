@@ -7,38 +7,29 @@ import ggomg.MemberManagement.role.RoleService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @Slf4j
-public class ProxyOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+@RequiredArgsConstructor
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private static final String NAVER_CLIENT = "Naver";
-    private final DefaultOAuth2UserService defaultOAuth2UserService;
+
     private final MemberService memberService;
     private final RoleService roleService;
 
-    @Autowired
-    public ProxyOAuth2UserService(MemberService memberService, RoleService roleService) {
-        this.defaultOAuth2UserService = new DefaultOAuth2UserService();
-        this.memberService = memberService;
-        this.roleService = roleService;
-    }
-
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        log.info("***** load User *****");
-        OAuth2User loadedUser = defaultOAuth2UserService.loadUser(userRequest);
-
+        OAuth2User loadedUser = super.loadUser(userRequest);
         Set<GrantedAuthority> authorities;
         Map<String, Object> userAttributes;
         String userNameAttributeName;
@@ -64,7 +55,10 @@ public class ProxyOAuth2UserService implements OAuth2UserService<OAuth2UserReque
         Member member = memberService.findByOAuthId(oauthId);
         authorities = roleService.buildUserAuthority(member.getId());
 
+        userAttributes.put("id", member.getId());
+        userNameAttributeName = "id";
+
         return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
     }
-}
 
+}

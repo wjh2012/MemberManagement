@@ -2,8 +2,7 @@ package ggomg.MemberManagement.security.config;
 
 
 import ggomg.MemberManagement.security.OAuth2User.CustomAuthorizationRequestResolver;
-import ggomg.MemberManagement.security.OAuth2User.ProxyOAuth2UserService;
-import ggomg.MemberManagement.security.OAuth2User.ProxyOIDCUserService;
+import ggomg.MemberManagement.security.OAuth2User.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +21,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class CustomWebSecurityConfig {
 
     private final CustomAuthorizationRequestResolver customAuthorizationRequestResolver;
-    private final ProxyOAuth2UserService proxyOAuth2UserService;
-    private final ProxyOIDCUserService oidcUserService;
+    private final CustomOAuth2UserService customOAuth2UserService;
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -50,8 +49,7 @@ public class CustomWebSecurityConfig {
                                 .authorizationRequestResolver(customAuthorizationRequestResolver)
                         )
                         .userInfoEndpoint(userInfo -> userInfo
-                                .userService(proxyOAuth2UserService)
-                                .oidcUserService(oidcUserService)
+                                .userService(customOAuth2UserService)
                         )
                         .defaultSuccessUrl("/")
                 )
