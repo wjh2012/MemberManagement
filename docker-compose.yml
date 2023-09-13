@@ -21,5 +21,11 @@ services:
       - member_management_db
     restart: on-failure
 
+  member_management_session:
+    container_name: mm_session
+    image: redis:latest
+    ports:
+      - 8070:6379
+
 volumes:
   MMDB:

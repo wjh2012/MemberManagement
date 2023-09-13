@@ -4,6 +4,7 @@ import ggomg.MemberManagement.member.DTO.LocalMemberRegisterEssentials;
 import ggomg.MemberManagement.role.MemberRole;
 import ggomg.MemberManagement.role.Role;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
@@ -41,8 +42,10 @@ public class Member {
 
     private String oauthId;
 
+    @Column(unique = true)
     private String nickname;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
