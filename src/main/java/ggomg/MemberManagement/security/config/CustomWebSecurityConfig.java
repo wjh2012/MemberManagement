@@ -23,7 +23,6 @@ public class CustomWebSecurityConfig {
     private final CustomAuthorizationRequestResolver customAuthorizationRequestResolver;
     private final CustomOAuth2UserService customOAuth2UserService;
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -55,7 +54,7 @@ public class CustomWebSecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .deleteCookies("JSESSIONID")
+                        .deleteCookies("SESSION")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutSuccessUrl("/")
@@ -64,4 +63,5 @@ public class CustomWebSecurityConfig {
 
         return http.build();
     }
+
 }
