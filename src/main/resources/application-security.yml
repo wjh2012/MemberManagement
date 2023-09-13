@@ -7,11 +7,12 @@ spring:
       client:
         registration:
           google:
-            scope: email
+            scope: email, profile
             redirect-uri: http://localhost:8080/login/oauth2/code/google
             client-id: 896670349972-cdi3dqt8qs6kvm3f9k6opmb14jqq00vf.apps.googleusercontent.com
             client-secret: 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
           github:
+            scope: user:read
             redirect-uri: http://localhost:8080/login/oauth2/code/github
             client-id: 0309b3c318aa18ee0c03
             client-secret: a1ce3d49856f3f4b60695321226438669fc8072d
