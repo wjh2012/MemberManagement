@@ -2,13 +2,11 @@ package ggomg.MemberManagement.security.OAuth2User;
 
 import ggomg.MemberManagement.member.Member;
 import ggomg.MemberManagement.member.MemberService;
-import ggomg.MemberManagement.role.RoleName;
 import ggomg.MemberManagement.role.RoleService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
@@ -16,9 +14,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
 public class ProxyOIDCUserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
 
@@ -26,7 +22,6 @@ public class ProxyOIDCUserService implements OAuth2UserService<OidcUserRequest, 
     private final MemberService memberService;
     private final RoleService roleService;
 
-    @Autowired
     public ProxyOIDCUserService(MemberService memberService, RoleService roleService) {
         this.oidcUserService = new OidcUserService();
         this.memberService = memberService;
@@ -49,8 +44,8 @@ public class ProxyOIDCUserService implements OAuth2UserService<OidcUserRequest, 
         String oauthId = userAttributes.get(userNameAttributeName).toString();
 
         if (!memberService.isExistByOauthId(oauthId)) {
-            Long memberId = memberService.joinOAuth2Member(clientName, oauthId);
-            roleService.grantRole(memberId, RoleName.USER);
+//            Long memberId = memberService.joinOAuth2Member(clientName, oauthId);
+//            roleService.grantRole(memberId, RoleName.USER);
         }
         Member member = memberService.findByOAuthId(oauthId);
         authorities = roleService.buildUserAuthority(member.getId());
