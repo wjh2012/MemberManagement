@@ -1,6 +1,5 @@
 package ggomg.MemberManagement.member;
 
-import static ggomg.MemberManagement.exception.RegisterErrorCode.REGISTER_FAIL_DUPLICATED_NICKNAME;
 import static ggomg.MemberManagement.exception.RegisterErrorCode.REGISTER_FAIL_DUPLICATED_USERNAME;
 
 import ggomg.MemberManagement.controller.DTO.request.LocalMemberRegisterRequest;
@@ -8,6 +7,7 @@ import ggomg.MemberManagement.controller.DTO.request.MemberSearchRequest;
 import ggomg.MemberManagement.exception.RegistrationException;
 import ggomg.MemberManagement.member.DTO.LocalMemberRegisterEssentials;
 import ggomg.MemberManagement.member.DTO.MemberSearchCondition;
+import ggomg.MemberManagement.member.DTO.OAuth2MemberRegisterEssentials;
 import ggomg.MemberManagement.role.RoleName;
 import ggomg.MemberManagement.role.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -35,9 +35,6 @@ public class MemberService {
         if (memberRepository.existsByUsername(username)) {
             throw new RegistrationException(REGISTER_FAIL_DUPLICATED_USERNAME);
         }
-        if (memberRepository.existsByNickname(nickname)) {
-            throw new RegistrationException(REGISTER_FAIL_DUPLICATED_NICKNAME);
-        }
 
         String encryptedPassword = bCryptPasswordEncoder.encode(password);
 
@@ -50,12 +47,12 @@ public class MemberService {
         return member.getId();
     }
 
-    public Long joinOAuth2Member(String oauthType, String oauthId) {
+    public Long joinOAuth2Member(String oauthType, String oauthId, String nickname) {
         if (memberRepository.existsByOauthId(oauthId)) {
             throw new IllegalArgumentException("already exist");
         }
 
-        Member member = Member.createByOAuth2(oauthType, oauthId);
+        Member member = Member.createByOAuth2(OAuth2MemberRegisterEssentials.of(oauthType, oauthId, nickname));
 
         memberRepository.save(member);
         return member.getId();

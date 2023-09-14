@@ -1,6 +1,7 @@
 package ggomg.MemberManagement.member;
 
 import ggomg.MemberManagement.member.DTO.LocalMemberRegisterEssentials;
+import ggomg.MemberManagement.member.DTO.OAuth2MemberRegisterEssentials;
 import ggomg.MemberManagement.role.MemberRole;
 import ggomg.MemberManagement.role.Role;
 import jakarta.persistence.CascadeType;
@@ -71,13 +72,14 @@ public class Member {
                 .build();
     }
 
-    public static Member createByOAuth2(String authType, String oauthId) {
+    public static Member createByOAuth2(OAuth2MemberRegisterEssentials oAuth2MemberRegisterEssentials) {
         return Member.builder()
                 .username(null)
                 .password(null)
                 .isOauth(true)
-                .authType(authType)
-                .oauthId(oauthId)
+                .authType(oAuth2MemberRegisterEssentials.getAuthType())
+                .oauthId(oAuth2MemberRegisterEssentials.getOauthId())
+                .nickname(oAuth2MemberRegisterEssentials.getNickname())
                 .build();
     }
 
