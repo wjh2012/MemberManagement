@@ -25,12 +25,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         try {
             Member member = memberService.findByUsername(username);
-            MemberDTO memberDTO = new MemberDTO(
-                    member.getUsername(),
-                    member.getPassword(),
-                    roleService.buildUserAuthority(member.getId()),
-                    member.getNickname()
-            );
+            MemberDTO memberDTO = MemberDTO.builder()
+                    .id(member.getId())
+                    .username(member.getUsername())
+                    .password(member.getPassword())
+                    .authorities(roleService.buildUserAuthority(member.getId()))
+                    .nickname(member.getNickname())
+                    .build();
+
             return new CustomUser(memberDTO);
         } catch (Exception e) {
             throw new UsernameNotFoundException("사용자를 검색하는 도중 예외 발생: " + username, e);

@@ -7,10 +7,8 @@ import ggomg.MemberManagement.role.RoleService;
 import ggomg.MemberManagement.security.CustomUser;
 import ggomg.MemberManagement.security.MemberDTO;
 import java.util.Map;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -49,14 +47,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 
         Member member = memberService.findByOAuthId(oauthId);
-        Set<GrantedAuthority> authorities = roleService.buildUserAuthority(member.getId());
 
-        MemberDTO memberDTO = new MemberDTO(
-                oauthId,
-                null,
-                authorities,
-                nickname
-        );
+        MemberDTO memberDTO = MemberDTO.builder()
+                .id(member.getId())
+                .username(member.getOauthId())
+                .authorities(roleService.buildUserAuthority(member.getId()))
+                .nickname(member.getNickname())
+                .build();
 
         return new CustomUser(memberDTO);
     }
