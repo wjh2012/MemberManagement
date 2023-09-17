@@ -103,4 +103,8 @@ public class Member {
             this.memberRoles.remove(memberRoleToRemove);
         }
     }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
