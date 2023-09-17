@@ -43,9 +43,9 @@
                     검색
                 </button>
 
-                <button onclick="addDummyRequest()" sec:authorize="hasAuthority('ADMIN')">더미 멤버 생성하기</button>
-                <button onclick="addDummysRequest()" sec:authorize="hasAuthority('ADMIN')">더미 멤버 50개 생성하기</button>
-                <button onclick="deleteMember()" sec:authorize="hasAuthority('ADMIN')">멤버 삭제</button>
+                <button onclick="addDummyRequest()" sec:authorize="hasAuthority('MANAGER')">더미 멤버 생성하기</button>
+                <button onclick="addDummysRequest()" sec:authorize="hasAuthority('MANAGER')">더미 멤버 50개 생성하기</button>
+                <button onclick="deleteMember()" sec:authorize="hasAuthority('MANAGER')">멤버 삭제</button>
             </div>
 
         </form>
