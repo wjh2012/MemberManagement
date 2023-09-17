@@ -8,7 +8,7 @@
     </ul>
 
     <ul sec:authorize="isAuthenticated()">
-        <li><a th:href="@{/myPage}">
+        <li><a th:href="@{/member/myPage}">
             <div sec:authentication="principal.nickname"></div>
         </a></li>
         <li><a th:href="@{/logout}">로그아웃</a></li>
