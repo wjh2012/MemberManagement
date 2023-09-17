@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class AdminDeleteMembersRequest {
-    private List<String> selectedIds;
+    private List<Long> selectedIds;
 }

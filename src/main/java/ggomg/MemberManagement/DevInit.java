@@ -35,8 +35,6 @@ public class DevInit {
 
             roleService.grantRole(admin.getId(), RoleName.ADMIN);
             roleService.grantRole(manager.getId(), RoleName.MANAGER);
-
-            roleService.grantRole(member.getId(), RoleName.MANAGER);
             roleService.grantRole(member.getId(), RoleName.ADMIN);
             roleService.revokeRole(member.getId(), RoleName.ADMIN);
         } catch (Exception e) {

@@ -70,7 +70,6 @@ public class MemberService {
         return memberRepository.existsByOauthId(oauthId);
     }
 
-
     public Page<Member> searchMember(MemberSearchRequest memberSearchRequest) {
         MemberSearchCondition memberSearchCondition = memberSearchRequest.getMemberSearchCondition();
         PageRequest pageRequest =

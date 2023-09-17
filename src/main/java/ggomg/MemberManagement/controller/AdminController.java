@@ -4,11 +4,13 @@ import ggomg.MemberManagement.controller.DTO.request.AdminDeleteMembersRequest;
 import ggomg.MemberManagement.controller.DTO.request.LocalMemberRegisterRequest;
 import ggomg.MemberManagement.member.AdminService;
 import ggomg.MemberManagement.member.MemberService;
+import ggomg.MemberManagement.security.CustomUser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,7 +54,9 @@ public class AdminController {
     @PostMapping("deleteMembers")
     public ResponseEntity<?> deleteMembers(@RequestBody AdminDeleteMembersRequest adminDeleteMembersRequest) {
 
-        adminDeleteMembersRequest.getSelectedIds().forEach(id -> adminService.deleteMember(Long.valueOf(id)));
+        CustomUser customUser = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long userId = customUser.getId();
+        adminService.deleteMembers(userId, adminDeleteMembersRequest.getSelectedIds());
 
         return ResponseEntity.ok().body("Successfully delete members");
     }

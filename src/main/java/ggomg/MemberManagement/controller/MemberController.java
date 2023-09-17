@@ -30,21 +30,6 @@ public class MemberController {
         return "page/member-list";
     }
 
-//    @PostMapping("list")
-//    public String memberSearch(Model model, @RequestBody MemberSearchRequest memberSearchRequest) {
-//
-//        Page<Member> memberPage = memberService.searchMember(memberSearchRequest);
-//        List<MemberResponse> members = memberPage.stream().map(MemberResponse::mappedByMember).toList();
-//
-//        PagingResponse<MemberResponse> response = new PagingResponse<>();
-//        response.setList(members);
-//        response.setRecordInfo(new RecordInfo((int) memberPage.getTotalElements()));
-//
-//        model.addAttribute("response", response);
-//
-//        return "/contents/member/_list-test";
-//    }
-
     @PostMapping("list")
     public ResponseEntity<PagingResponse<MemberResponse>> memberSearch(
             @RequestBody MemberSearchRequest memberSearchRequest) {
@@ -58,5 +43,6 @@ public class MemberController {
 
         return ResponseEntity.ok(response);
     }
+
 
 }

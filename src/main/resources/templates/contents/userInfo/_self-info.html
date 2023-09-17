@@ -7,7 +7,7 @@
         <label for="nickname">닉네임</label>
         <div sec:authentication="principal.nickname"></div>
 
-        <input type="hidden" name="targetId" th:value="${#authentication.principal.getId()}">
+        <input name="targetId" th:value="${#authentication.principal.getId()}" type="hidden">
         <input id="nickname" name="nickname" th:required="true" type="text">
 
         <button form="nickname-form" type="submit">닉네임 수정</button>

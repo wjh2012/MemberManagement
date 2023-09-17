@@ -9,9 +9,10 @@
 
         <form class="local-form" id="login-form" method="post" th:action="@{/login}">
             <label for="username">Username</label>
-            <input autofocus="autofocus" id="username" name="username" th:required="true" type="text" placeholder="admin"/>
+            <input autofocus="autofocus" id="username" name="username" placeholder="admin" th:required="true"
+                   type="text"/>
             <label for="password">Password</label>
-            <input id="password" name="password" th:required="true" type="password" placeholder="admin"/>
+            <input id="password" name="password" placeholder="admin" th:required="true" type="password"/>
 
             <button class="form-submit-button" form="login-form" type="submit">Login</button>
         </form>

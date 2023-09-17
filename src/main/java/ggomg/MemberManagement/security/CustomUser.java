@@ -2,13 +2,11 @@ package ggomg.MemberManagement.security;
 
 import java.util.Collection;
 import java.util.Map;
-import lombok.Data;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-@Data
 public class CustomUser implements UserDetails, OAuth2User, CredentialsContainer {
 
     private MemberDTO memberDTO;
@@ -70,6 +68,10 @@ public class CustomUser implements UserDetails, OAuth2User, CredentialsContainer
 
     public String getNickname() {
         return this.memberDTO.getNickname();
+    }
+
+    public Long getId() {
+        return this.memberDTO.getId();
     }
 
     @Override
