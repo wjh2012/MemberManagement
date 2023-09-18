@@ -58,6 +58,10 @@ public class MemberService {
         return member.getId();
     }
 
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElseThrow();
+    }
+
     public Member findByUsername(String username) {
         return memberRepository.findByUsername(username).orElseThrow();
     }
