@@ -7,7 +7,8 @@ ggomg.net
 - OAuth2 소셜 회원가입/로그인
   
 #### 회원조회
-- Paging
+- 조건 검색
+- Paging(offset)
   
 #### 회원삭제
 - MANAGER 이상의 권한을 가진 사용자만 가능
