@@ -38,4 +38,22 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("사용자를 검색하는 도중 예외 발생: " + username, e);
         }
     }
+
+    public UserDetails loadUserByUserId(Long userId) throws UsernameNotFoundException {
+
+        try {
+            Member member = memberService.findById(userId);
+            MemberDTO memberDTO = MemberDTO.builder()
+                    .id(member.getId())
+                    .username(member.getUsername())
+                    .password(member.getPassword())
+                    .authorities(roleService.buildUserAuthority(member.getId()))
+                    .nickname(member.getNickname())
+                    .build();
+
+            return new CustomUser(memberDTO);
+        } catch (Exception e) {
+            throw new UsernameNotFoundException("사용자를 검색하는 도중 예외 발생: " + userId, e);
+        }
+    }
 }
