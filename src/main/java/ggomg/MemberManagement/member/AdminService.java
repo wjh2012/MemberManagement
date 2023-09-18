@@ -1,5 +1,7 @@
 package ggomg.MemberManagement.member;
 
+import ggomg.MemberManagement.disabledMember.DisableMemberRepository;
+import ggomg.MemberManagement.disabledMember.DisabledMember;
 import ggomg.MemberManagement.role.MemberRole;
 import ggomg.MemberManagement.role.Role;
 import java.util.Comparator;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminService {
 
     private final MemberRepository memberRepository;
+    private final DisableMemberRepository disableMemberRepository;
 
     @Transactional
     public void deleteMembers(Long from, List<Long> targets) {
@@ -35,7 +38,7 @@ public class AdminService {
             throw new IllegalArgumentException();
         }
         memberRepository.deleteById(target);
-
+        disableMemberRepository.save(DisabledMember.of(target));
     }
 
     private Long findHighestRoleId(Member member) {
