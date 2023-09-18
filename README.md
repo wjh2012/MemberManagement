@@ -21,6 +21,3 @@
 - CD : Github Actions
 - Docker
 - AWS EC2
-- AWS Route 53
-- AWS ACM
-- AWS ALB
