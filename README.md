@@ -1,5 +1,5 @@
 # MemberManagement
-[ggomg.net]: ggomg.net
+[ggomg.net](ggomg.net)
 
 ## 주 기능
 #### 회원가입/로그인
