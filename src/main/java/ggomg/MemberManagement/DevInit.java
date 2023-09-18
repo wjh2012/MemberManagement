@@ -1,11 +1,11 @@
 package ggomg.MemberManagement;
 
-import ggomg.MemberManagement.controller.DTO.request.LocalMemberRegisterRequest;
-import ggomg.MemberManagement.member.Member;
-import ggomg.MemberManagement.member.MemberRepository;
-import ggomg.MemberManagement.member.MemberService;
-import ggomg.MemberManagement.role.RoleName;
-import ggomg.MemberManagement.role.RoleService;
+import ggomg.MemberManagement.domain.login_register.LocalMemberRegisterRequest;
+import ggomg.MemberManagement.domain.member.Member;
+import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.domain.member.reposiory.MemberRepository;
+import ggomg.MemberManagement.domain.role.RoleName;
+import ggomg.MemberManagement.domain.role.RoleService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

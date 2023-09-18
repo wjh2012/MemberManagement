@@ -1,9 +1,9 @@
 package ggomg.MemberManagement.security.OAuth2User;
 
-import ggomg.MemberManagement.member.Member;
-import ggomg.MemberManagement.member.MemberService;
-import ggomg.MemberManagement.role.RoleName;
-import ggomg.MemberManagement.role.RoleService;
+import ggomg.MemberManagement.domain.member.Member;
+import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.domain.role.RoleName;
+import ggomg.MemberManagement.domain.role.RoleService;
 import ggomg.MemberManagement.security.CustomUser;
 import ggomg.MemberManagement.security.MemberDTO;
 import java.util.Map;

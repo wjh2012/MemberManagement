@@ -3,7 +3,7 @@ package ggomg.MemberManagement.javaTest;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import ggomg.MemberManagement.role.RoleName;
+import ggomg.MemberManagement.domain.role.RoleName;
 import org.junit.jupiter.api.Test;
 
 public class ValueOfTest {

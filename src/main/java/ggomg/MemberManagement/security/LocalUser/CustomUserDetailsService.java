@@ -1,8 +1,8 @@
 package ggomg.MemberManagement.security.LocalUser;
 
-import ggomg.MemberManagement.member.Member;
-import ggomg.MemberManagement.member.MemberService;
-import ggomg.MemberManagement.role.RoleService;
+import ggomg.MemberManagement.domain.member.Member;
+import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.domain.role.RoleService;
 import ggomg.MemberManagement.security.CustomUser;
 import ggomg.MemberManagement.security.MemberDTO;
 import lombok.RequiredArgsConstructor;
