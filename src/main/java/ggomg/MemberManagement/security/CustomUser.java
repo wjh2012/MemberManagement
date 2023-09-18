@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class CustomUser implements UserDetails, OAuth2User, CredentialsContainer {
 
-    private MemberDTO memberDTO;
+    private final MemberDTO memberDTO;
     private Map<String, Object> attributes;
 
     public CustomUser(MemberDTO memberDTO) {

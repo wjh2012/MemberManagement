@@ -56,6 +56,7 @@ public class AdminController {
 
         CustomUser customUser = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = customUser.getId();
+
         adminService.deleteMembers(userId, adminDeleteMembersRequest.getSelectedIds());
 
         return ResponseEntity.ok().body("Successfully delete members");
