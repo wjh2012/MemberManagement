@@ -9,15 +9,15 @@
 
         <form class="local-form" id="login-form" method="post" th:action="@{/login}">
             <label for="username">Username</label>
-            <input autofocus="autofocus" id="username" name="username" th:required="true" type="text"/>
+            <input autofocus="autofocus" id="username" name="username" placeholder="admin" th:required="true"
+                   type="text"/>
             <label for="password">Password</label>
-            <input id="password" name="password" th:required="true" type="password"/>
+            <input id="password" name="password" placeholder="admin" th:required="true" type="password"/>
 
             <button class="form-submit-button" form="login-form" type="submit">Login</button>
         </form>
 
     </div>
-
     <!-- 실패 메시지를 표시할 팝업 -->
     <div th:if="${param.error}">
         <p id="login-fail">아이디 또는 비밀번호를 확인하세요.</p>

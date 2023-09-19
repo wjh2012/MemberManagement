@@ -1,19 +1,17 @@
 package ggomg.MemberManagement.security.OAuth2User;
 
-import ggomg.MemberManagement.member.Member;
-import ggomg.MemberManagement.member.MemberService;
-import ggomg.MemberManagement.role.RoleName;
-import ggomg.MemberManagement.role.RoleService;
-import java.util.HashMap;
+import ggomg.MemberManagement.domain.member.Member;
+import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.domain.role.RoleName;
+import ggomg.MemberManagement.domain.role.RoleService;
+import ggomg.MemberManagement.security.CustomUser;
+import ggomg.MemberManagement.security.MemberDTO;
 import java.util.Map;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -30,35 +28,34 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User loadedUser = super.loadUser(userRequest);
-        Set<GrantedAuthority> authorities;
-        Map<String, Object> userAttributes;
-        String userNameAttributeName;
 
+        Map<String, Object> userAttributes = loadedUser.getAttributes();
         String clientName = userRequest.getClientRegistration().getClientName();
+        String oauthId = null;
+
         if (clientName.equals(NAVER_CLIENT)) {
             userAttributes = (Map<String, Object>) loadedUser.getAttributes().get("response");
-            userAttributes.put("response", userAttributes.get("id").toString());
+            oauthId = userAttributes.get("id").toString();
         } else {
-            userAttributes = new HashMap<>(loadedUser.getAttributes());
+            oauthId = loadedUser.getName();
         }
 
-        userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
-                .getUserNameAttributeName();
-
-        String oauthId = userAttributes.get(userNameAttributeName).toString();
-
+        String nickname = userAttributes.getOrDefault("name", clientName + oauthId.substring(0, 4)).toString();
         if (!memberService.isExistByOauthId(oauthId)) {
-            Long memberId = memberService.joinOAuth2Member(clientName, oauthId);
+            Long memberId = memberService.joinOAuth2Member(clientName, oauthId, nickname);
             roleService.grantRole(memberId, RoleName.USER);
         }
 
         Member member = memberService.findByOAuthId(oauthId);
-        authorities = roleService.buildUserAuthority(member.getId());
 
-        userAttributes.put("id", member.getId());
-        userNameAttributeName = "id";
+        MemberDTO memberDTO = MemberDTO.builder()
+                .id(member.getId())
+                .username(member.getOauthId())
+                .authorities(roleService.buildUserAuthority(member.getId()))
+                .nickname(member.getNickname())
+                .build();
 
-        return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
+        return new CustomUser(memberDTO);
     }
 
 }

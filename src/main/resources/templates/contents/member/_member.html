@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<div id="member" th:fragment="member">
+  <h1>회원정보</h1>
+
+  <table>
+    <tr>
+      <td>ID:</td>
+      <td th:text="${member.id}"></td>
+    </tr>
+    <tr>
+      <td>소셜계정 여부:</td>
+      <td th:text="${member.isOauth ? 'Yes' : 'No'}"></td>
+    </tr>
+    <tr>
+      <td>가입 유형:</td>
+      <td th:text="${member.authType}"></td>
+    </tr>
+    <tr>
+      <td>소셜계정 ID:</td>
+      <td th:text="${member.oauthId}"></td>
+    </tr>
+    <tr>
+      <td>닉네임:</td>
+      <td th:text="${member.nickname}"></td>
+    </tr>
+    <tr>
+      <td>아이디:</td>
+      <td th:text="${member.username}"></td>
+    </tr>
+    <tr>
+      <td>생성일:</td>
+      <td th:text="${#temporals.format(member.createdDatetime, 'yyyy.MM.dd HH:mm')}"></td>
+    </tr>
+    <tr>
+      <td>권한:</td>
+      <td>
+        <ul>
+          <li th:each="role : ${member.roles}" th:text="${role}"></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</html>

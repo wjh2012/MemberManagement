@@ -2,13 +2,18 @@
 <html layout:decorate="~{layout.html}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title layout:fragment="title">
-        normal
-    </title>
+  <title layout:fragment="title">
+    member
+  </title>
 </head>
+
 <body>
+
 <section layout:fragment="content">
-    로그인 없이 조회
+  <div th:replace="~{contents/member/_member :: member}"></div>
+
 </section>
+
 </body>
+
 </html>

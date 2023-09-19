@@ -3,12 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title layout:fragment="title">
-        normal
+        myPage
     </title>
 </head>
 <body>
 <section layout:fragment="content">
-    로그인 없이 조회
+    <div th:replace="~{contents/member/_member :: member}"></div>
+    <div th:replace="~{contents/profile/_profile :: profile}"></div>
 </section>
 </body>
 </html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="profile">
+
+    <form id="nickname-form" method="post" th:action="@{/profile/nickname/update}">
+        <label for="nickname">닉네임 변경</label>
+        <div sec:authentication="principal.nickname"></div>
+
+        <input name="targetId" th:value="${#authentication.principal.getId()}" type="hidden">
+        <input id="nickname" name="nickname" th:required="true" type="text">
+
+        <button form="nickname-form" type="submit">닉네임 수정</button>
+    </form>
+
+    <div th:if="${param.error}">
+        <p id="register-fail">
+            <span th:if="${errorField == 'nickname'}">닉네임은 1자이상 16자 이하이며, 특수문자 사용이 불가능합니다.</span>
+        </p>
+    </div>
+</div>
+
+</html>

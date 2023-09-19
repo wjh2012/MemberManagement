@@ -4,6 +4,7 @@ function drawList(list) {
     if (!list.isEmpty) {
         console.log(list)
         list.forEach(row => {
+
             const tr = document.createElement('tr');
 
             const tdCheckbox = document.createElement('td');
@@ -25,27 +26,13 @@ function drawList(list) {
             tdAuthType.textContent = row.authType;
             tr.appendChild(tdAuthType);
 
-            const tdOauthId = document.createElement('td');
-            tdOauthId.textContent = row.oauthId;
-            tr.appendChild(tdOauthId);
-
             const tdNickname = document.createElement('td');
-            tdNickname.textContent = row.nickname;
+            const link = document.createElement('a');
+            link.textContent = row.nickname;
+            link.href = `members/${row.id}`;
+            tdNickname.appendChild(link);
             tr.appendChild(tdNickname);
 
-            const tdUsername = document.createElement('td');
-            tdUsername.textContent = row.username;
-            tr.appendChild(tdUsername);
-
-            const tdCreatedDatetime = document.createElement('td');
-            tdCreatedDatetime.textContent = new Date(row.createdDatetime).toLocaleString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            tr.appendChild(tdCreatedDatetime);
 
             const tdRoles = document.createElement('td');
             const ul = document.createElement('ul');
