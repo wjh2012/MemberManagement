@@ -1,5 +1,9 @@
 package ggomg.MemberManagement.domain.profile;
 
+import ggomg.MemberManagement.domain.member.DTO.MemberResponse;
+import ggomg.MemberManagement.domain.member.Member;
+import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.security.CustomUser;
 import ggomg.MemberManagement.security.LocalUser.CustomUserDetailsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -7,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,27 +26,40 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/profile")
 public class ProfileController {
 
+    private final MemberService memberService;
     private final ProfileService profileService;
     private final CustomUserDetailsService customUserDetailsService;
 
     @GetMapping({"", "update"})
-    public String myPage() {
+    public String myPage(Model model) {
+
+        CustomUser customUser = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Member member = memberService.findById(customUser.getId());
+        MemberResponse memberResponse = MemberResponse.mappedByMember(member);
+        model.addAttribute("member", memberResponse);
+
         return "page/profile";
     }
 
     @PostMapping("nickname/update")
-    public String updateNickname(@Valid NicknameUpdateRequest nicknameUpdateRequest) {
+    public String updateNickname(@Valid NicknameUpdateRequest nicknameUpdateRequest, Model model) {
+
+        CustomUser customUser = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         profileService.updateNickname(
-                nicknameUpdateRequest.getTargetId(),
+                customUser.getId(),
                 nicknameUpdateRequest.getNickname()
         );
 
-        UserDetails reloadedUser = customUserDetailsService.loadUserByUserId(nicknameUpdateRequest.getTargetId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(reloadedUser, auth.getCredentials(),
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(customUser, auth.getCredentials(),
                 auth.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+        Member member = memberService.findById(customUser.getId());
+        MemberResponse memberResponse = MemberResponse.mappedByMember(member);
+        model.addAttribute("member", memberResponse);
 
         return "page/profile";
     }

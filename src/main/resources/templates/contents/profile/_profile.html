@@ -4,7 +4,7 @@
 <div th:fragment="profile">
 
     <form id="nickname-form" method="post" th:action="@{/profile/nickname/update}">
-        <label for="nickname">닉네임</label>
+        <label for="nickname">닉네임 변경</label>
         <div sec:authentication="principal.nickname"></div>
 
         <input name="targetId" th:value="${#authentication.principal.getId()}" type="hidden">

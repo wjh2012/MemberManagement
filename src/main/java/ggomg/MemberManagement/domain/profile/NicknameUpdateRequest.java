@@ -8,11 +8,6 @@ import lombok.Data;
 @Data
 public class NicknameUpdateRequest {
 
-    private Long fromId;
-
-    @NotNull
-    private Long targetId;
-
     @NotNull
     @Size(min = 1, max = 16)
     @Pattern(regexp = "^[가-힣a-zA-Z0-9]+$")
