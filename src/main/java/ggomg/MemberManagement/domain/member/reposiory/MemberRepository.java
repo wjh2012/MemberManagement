@@ -15,8 +15,6 @@ public interface MemberRepository extends CrudRepository<Member, Long>, MemberCu
 
     boolean existsByUsername(String username);
 
-    boolean existsByNickname(String username);
-
     boolean existsByOauthId(String oauthId);
 
     @Query("select m from Member m join fetch m.memberRoles m_r join fetch m_r.role")
