@@ -27,8 +27,8 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
         List<Member> members = query
                 .select(member)
                 .from(member)
-                .join(member.memberRoles, memberRole).fetchJoin()
-                .join(memberRole.role, role).fetchJoin()
+                .leftJoin(member.memberRoles, memberRole).fetchJoin()
+                .leftJoin(memberRole.role, role).fetchJoin()
                 .where(
                         isOauthEq(memberSearchCondition.getIsOauth()),
                         authTypeEq(memberSearchCondition.getAuthType()),
