@@ -58,7 +58,9 @@ function deleteMember() {
                     alert('선택된 회원이 성공적으로 삭제되었습니다.');
                     location.reload();
                 } else {
-                    alert('회원 삭제에 실패했습니다.');
+                    response.text().then(errorMessage => {
+                        alert('삭제 중 오류 발생: ' + errorMessage);
+                    });
                 }
             })
             .catch(error => {

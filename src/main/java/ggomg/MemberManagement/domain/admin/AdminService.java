@@ -7,6 +7,8 @@ import ggomg.MemberManagement.domain.member.Member;
 import ggomg.MemberManagement.domain.member.reposiory.MemberRepository;
 import ggomg.MemberManagement.domain.role.MemberRole;
 import ggomg.MemberManagement.domain.role.Role;
+import ggomg.MemberManagement.exception.AuthorityError;
+import ggomg.MemberManagement.exception.AuthorityException;
 import ggomg.MemberManagement.security.CustomUser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,8 +75,9 @@ public class AdminService {
         log.info(toHighestRoleId.toString());
 
         if (fromHighestRoleId >= toHighestRoleId) {
-            throw new IllegalArgumentException();
+            throw new AuthorityException(AuthorityError.PERMISSION_EXCEEDED);
         }
+
         memberRepository.deleteById(targetId);
         disableMemberRepository.save(DisabledMember.of(targetId));
     }
@@ -86,7 +89,7 @@ public class AdminService {
                 .map(MemberRole::getRole)
                 .min(Comparator.comparingLong(r -> r.getRoleName().getId()))
                 .map(Role::getId)
-                .orElse(null);
+                .orElse(99L);
     }
 
 }
