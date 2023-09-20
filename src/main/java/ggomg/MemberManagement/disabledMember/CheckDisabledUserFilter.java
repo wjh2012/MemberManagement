@@ -34,7 +34,7 @@ public class CheckDisabledUserFilter extends OncePerRequestFilter {
             CustomUser customUser = (CustomUser) authentication.getPrincipal();
 
             try {
-                Optional<DisabledMember> disabledMember = disableMemberRepository.findByMemberId(customUser.getId());
+                Optional<DisabledMember> disabledMember = disableMemberRepository.findByMemberId(customUser.getId().toString());
                 disabledMember.ifPresent(this::handleDisabledMember);
             } catch (Exception e) {
                 // 예외 처리 - 클라이언트에게 오류 응답 반환 등

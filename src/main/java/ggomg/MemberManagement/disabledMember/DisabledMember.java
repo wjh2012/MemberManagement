@@ -2,21 +2,23 @@ package ggomg.MemberManagement.disabledMember;
 
 import jakarta.persistence.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
-@RedisHash(value = "disabledMember", timeToLive = 600)
+@RedisHash(value = "disabledMember")
 public class DisabledMember {
 
-    @Indexed
-    private final Long memberId;
     @Id
-    private Long id;
+    private String id;
 
-    private DisabledMember(Long memberId) {
+    @Indexed
+    private String memberId;
+
+    private DisabledMember(String memberId) {
         this.memberId = memberId;
     }
 
-    public static DisabledMember of(Long memberId) {
+    public static DisabledMember of(String memberId) {
         return new DisabledMember(memberId);
     }
 }
