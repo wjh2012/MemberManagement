@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -23,6 +25,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity(debug = false)
+@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @RequiredArgsConstructor
 @Slf4j
 public class CustomWebSecurityConfig {
@@ -39,15 +42,13 @@ public class CustomWebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
                 .addFilterAfter(new CheckDisabledUserFilter(disableMemberRepository), SecurityContextHolderFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/oauth2/**", "/login/**", "/register/**", "/normal/**", "/error/**"
                                 , "/images/**", "/console/**", "/favicon.ico/**")
                         .permitAll()
-                        .requestMatchers("/member/oauth2").hasAuthority("OAUTH2_USER")
-                        .requestMatchers("/member/oidc").hasAuthority("OIDC_USER")
-                        .requestMatchers("/member/role").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

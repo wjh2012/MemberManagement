@@ -79,7 +79,7 @@ public class AdminService {
         }
 
         memberRepository.deleteById(targetId);
-        disableMemberRepository.save(DisabledMember.of(targetId));
+        disableMemberRepository.save(DisabledMember.of(targetId.toString()));
     }
 
     private Long findHighestRoleId(Member member) {
