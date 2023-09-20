@@ -3,27 +3,29 @@ function addDummyRequest() {
         url: '/admin/addDummyMember',
         method: 'Post',
         success: function (response) {
-            alert('더미 데이터 생성에 성공했습니다.');
+            alert("더미 데이터 생성에 성공했습니다.");
             location.reload();
         },
         error: function () {
-            alert('더미 데이터 생성에 실패했습니다.');
+            alert("권한이 부족합니다.");
         }
     });
 }
 
 function addDummysRequest() {
-    $.ajax({
-        url: '/admin/addDummyMembers',
-        method: 'Post',
-        success: function (response) {
-            alert('더미 데이터 생성에 성공했습니다.');
-            location.reload();
-        },
-        error: function () {
-            alert('더미 데이터 생성에 실패했습니다.');
-        }
-    });
+    fetch('/admin/addDummyMembers', {
+        method: 'POST',
+    })
+        .then(response => {
+            if (response.ok) {
+                alert("더미 데이터 생성에 성공했습니다.");
+            } else {
+                alert("권한이 부족합니다.");
+            }
+        })
+        .catch(error => {
+            alert("오류: " + error.message);
+        });
 }
 
 function deleteMember() {
@@ -53,7 +55,6 @@ function deleteMember() {
             body: JSON.stringify(request),
         })
             .then(response => {
-                console.log(response);
                 if (response.ok) {
                     alert('선택된 회원이 성공적으로 삭제되었습니다.');
                     location.reload();
