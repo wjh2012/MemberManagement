@@ -4,6 +4,8 @@ import ggomg.MemberManagement.exception.AuthorityException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +22,7 @@ public class AdminController {
 
     private final AdminService adminService;
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PostMapping("addDummyMember")
     public ResponseEntity<?> addDummyMember() {
 
@@ -27,6 +30,7 @@ public class AdminController {
         return ResponseEntity.ok().body("Successfully added dummy member");
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("addDummyMembers")
     public ResponseEntity<?> addDummyMembers() {
 
@@ -34,6 +38,7 @@ public class AdminController {
         return ResponseEntity.ok().body("Successfully added 50 dummy members");
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("deleteMembers")
     public ResponseEntity<?> deleteMembers(@RequestBody AdminDeleteMembersRequest adminDeleteMembersRequest) {
 
