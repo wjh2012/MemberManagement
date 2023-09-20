@@ -258,7 +258,6 @@
     position: relative;
 }
 
-/* #member-list 스타일 */
 #member {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
@@ -305,4 +304,8 @@
 #member td:nth-child(odd) {
     font-weight: bold;
     color: #555;
+}
+
+#profile {
+    margin: 0 auto;
 }
