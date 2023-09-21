@@ -1,7 +1,7 @@
 package ggomg.MemberManagement.domain.admin;
 
-import ggomg.MemberManagement.disabledMember.DisableMemberRepository;
-import ggomg.MemberManagement.disabledMember.DisabledMember;
+import ggomg.MemberManagement.domain.disabledMember.DisableMemberRepository;
+import ggomg.MemberManagement.domain.disabledMember.DisabledMember;
 import ggomg.MemberManagement.domain.member.DTO.LocalMemberRegisterEssentials;
 import ggomg.MemberManagement.domain.member.Member;
 import ggomg.MemberManagement.domain.member.reposiory.MemberRepository;

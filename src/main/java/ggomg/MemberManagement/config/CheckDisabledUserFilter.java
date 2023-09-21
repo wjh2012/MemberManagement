@@ -1,5 +1,7 @@
-package ggomg.MemberManagement.disabledMember;
+package ggomg.MemberManagement.config;
 
+import ggomg.MemberManagement.domain.disabledMember.DisableMemberRepository;
+import ggomg.MemberManagement.domain.disabledMember.DisabledMember;
 import ggomg.MemberManagement.security.CustomUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -34,7 +36,8 @@ public class CheckDisabledUserFilter extends OncePerRequestFilter {
             CustomUser customUser = (CustomUser) authentication.getPrincipal();
 
             try {
-                Optional<DisabledMember> disabledMember = disableMemberRepository.findByMemberId(customUser.getId().toString());
+                Optional<DisabledMember> disabledMember = disableMemberRepository.findByMemberId(
+                        customUser.getId().toString());
                 disabledMember.ifPresent(this::handleDisabledMember);
             } catch (Exception e) {
                 // 예외 처리 - 클라이언트에게 오류 응답 반환 등

@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.disabledMember;
+package ggomg.MemberManagement.domain.disabledMember;
 
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;

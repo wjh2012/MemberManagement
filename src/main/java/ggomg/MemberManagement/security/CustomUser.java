@@ -2,18 +2,24 @@ package ggomg.MemberManagement.security;
 
 import java.util.Collection;
 import java.util.Map;
+import lombok.Data;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+@Data
 public class CustomUser implements UserDetails, OAuth2User, CredentialsContainer {
 
-    private final MemberDTO memberDTO;
+    private MemberDTO memberDTO;
     private Map<String, Object> attributes;
 
     public CustomUser(MemberDTO memberDTO) {
         this.memberDTO = memberDTO;
+    }
+
+    public void updateNickname(String nickname) {
+        this.memberDTO.setNickname(nickname);
     }
 
     @Override
