@@ -12,10 +12,8 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@Component
 @Slf4j
 public class CheckDisabledUserFilter extends OncePerRequestFilter {
 
@@ -32,7 +30,7 @@ public class CheckDisabledUserFilter extends OncePerRequestFilter {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && !authentication.getPrincipal().equals("anonymousUser")) {
-            log.info("when authenticate()");
+            log.info("anonymousUser 아닌 인증 유저");
             CustomUser customUser = (CustomUser) authentication.getPrincipal();
 
             try {
@@ -41,7 +39,7 @@ public class CheckDisabledUserFilter extends OncePerRequestFilter {
                 disabledMember.ifPresent(this::handleDisabledMember);
             } catch (Exception e) {
                 // 예외 처리 - 클라이언트에게 오류 응답 반환 등
-                log.error("An error occurred while checking for disabled member.", e);
+                log.error("DisabledMember Error", e);
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 return;
             }
