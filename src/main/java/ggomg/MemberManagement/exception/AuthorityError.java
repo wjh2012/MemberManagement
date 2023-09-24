@@ -7,8 +7,7 @@ import lombok.Getter;
 @Getter
 public enum AuthorityError implements ErrorCode {
 
-    PERMISSION_EXCEEDED(301, "권한을 초과하였습니다.")
-    ;
+    PERMISSION_EXCEEDED(301, "권한을 초과하였습니다.");
 
     private final int code;
     private final String message;

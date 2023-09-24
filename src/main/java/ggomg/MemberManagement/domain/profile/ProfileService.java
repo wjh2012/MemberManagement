@@ -13,11 +13,13 @@ public class ProfileService {
 
     private final MemberRepository memberRepository;
 
-    public void updateNickname(Long userId, String nickname) {
+    public Member updateNickname(Long userId, String nickname) {
 
         Member member = memberRepository.findById(userId).orElseThrow();
         member.updateNickname(nickname);
+
         memberRepository.save(member);
+        return member;
     }
 
 }

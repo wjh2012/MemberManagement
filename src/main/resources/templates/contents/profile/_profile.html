@@ -12,6 +12,8 @@
         <button form="nickname-form" type="submit">변경</button>
     </form>
 
+    <div sec:authentication="principal.nickname"></div>
+
     <div th:if="${param.error}">
         <p id="register-fail">
             <span th:if="${errorField == 'nickname'}">닉네임은 1자이상 16자 이하이며, 특수문자 사용이 불가능합니다.</span>
