@@ -3,12 +3,13 @@ package ggomg.MemberManagement.domain.profile;
 import ggomg.MemberManagement.domain.member.DTO.MemberResponse;
 import ggomg.MemberManagement.domain.member.Member;
 import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.domain.session.SessionService;
 import ggomg.MemberManagement.security.CustomUser;
-import ggomg.MemberManagement.security.LocalUser.CustomUserDetailsService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/profile")
+@RequiredArgsConstructor
 public class ProfileController {
 
     private final MemberService memberService;
     private final ProfileService profileService;
-    private final CustomUserDetailsService customUserDetailsService;
+    private final SessionService sessionService;
 
     @GetMapping({"", "update"})
     public String myPage(Model model) {
@@ -43,25 +44,19 @@ public class ProfileController {
     }
 
     @PostMapping("nickname/update")
-    public String updateNickname(@Valid NicknameUpdateRequest nicknameUpdateRequest, Model model) {
+    public String updateNickname(@Valid NicknameUpdateRequest nicknameUpdateRequest, HttpServletRequest request,
+                                 HttpServletResponse response) {
 
-        CustomUser customUser = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String nickname = nicknameUpdateRequest.getNickname();
 
-        profileService.updateNickname(
-                customUser.getId(),
-                nicknameUpdateRequest.getNickname()
-        );
+        Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
+        CustomUser customUser = (CustomUser) oldAuth.getPrincipal();
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(customUser, auth.getCredentials(),
-                auth.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(newAuth);
+        customUser.updateNickname(nickname);
+        profileService.updateNickname(customUser.getId(), nickname);
+        sessionService.updateSession(request, response);
 
-        Member member = memberService.findById(customUser.getId());
-        MemberResponse memberResponse = MemberResponse.mappedByMember(member);
-        model.addAttribute("member", memberResponse);
-
-        return "page/profile";
+        return "redirect:/profile";
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -71,6 +66,5 @@ public class ProfileController {
         redirectAttributes.addFlashAttribute("errorField", e.getBindingResult().getFieldError().getField());
         return "redirect:/profile?error=true";
     }
-
 
 }
