@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.config;
+package ggomg.MemberManagement.config.SSRConfig;
 
 import ggomg.MemberManagement.domain.disabledMember.DisableMemberRepository;
 import ggomg.MemberManagement.domain.disabledMember.DisabledMember;

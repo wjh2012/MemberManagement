@@ -4,7 +4,7 @@ import jakarta.persistence.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
-@RedisHash(value = "disabledMember")
+@RedisHash(value = "disabledMember", timeToLive = 600)
 public class DisabledMember {
 
     @Id
