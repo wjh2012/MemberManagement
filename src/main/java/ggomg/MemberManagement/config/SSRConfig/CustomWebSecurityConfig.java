@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.config;
+package ggomg.MemberManagement.config.SSRConfig;
 
 
 import ggomg.MemberManagement.domain.disabledMember.DisableMemberRepository;
@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -38,6 +39,7 @@ public class CustomWebSecurityConfig {
     }
 
     @Bean
+    @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .addFilterAfter(new CheckDisabledUserFilter(disableMemberRepository), SecurityContextHolderFilter.class)
