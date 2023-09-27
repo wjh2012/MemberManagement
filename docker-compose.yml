@@ -11,7 +11,6 @@ services:
       MYSQL_PASSWORD: 00000000
     volumes:
       - MMDB:/var/lib/mysql
-      -
   member_management_session:
     container_name: mm_session
     image: redis:latest
