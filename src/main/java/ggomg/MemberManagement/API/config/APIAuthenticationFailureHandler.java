@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.config.APIConfig;
+package ggomg.MemberManagement.API.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -52,8 +52,6 @@ public class CustomWebSecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .usernameParameter("username")
-                        .defaultSuccessUrl("/")
                         .failureUrl("/login?error=true")
                 )
                 .oauth2Login(login -> login

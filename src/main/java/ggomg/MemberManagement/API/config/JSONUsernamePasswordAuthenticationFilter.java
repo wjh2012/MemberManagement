@@ -1,4 +1,4 @@
-package ggomg.MemberManagement.config.APIConfig;
+package ggomg.MemberManagement.API.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -19,7 +19,6 @@ public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
 
     @Override
     protected String obtainUsername(HttpServletRequest request) {
-
         obtainJSON(request);
         return username;
     }
@@ -33,7 +32,7 @@ public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
                 jsonPayload.append(line);
             }
             JSONObject jsonData = new JSONObject(jsonPayload.toString());
-            this.username = jsonData.getString("email");
+            this.username = jsonData.getString("username");
             this.password = jsonData.getString("password");
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
