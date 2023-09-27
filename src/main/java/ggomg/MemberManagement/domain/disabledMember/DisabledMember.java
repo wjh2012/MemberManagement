@@ -11,7 +11,7 @@ public class DisabledMember {
     private String id;
 
     @Indexed
-    private String memberId;
+    private final String memberId;
 
     private DisabledMember(String memberId) {
         this.memberId = memberId;
