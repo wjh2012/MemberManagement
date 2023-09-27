@@ -3,8 +3,7 @@ package ggomg.MemberManagement.API.config;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONObject;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -34,8 +33,8 @@ public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
             JSONObject jsonData = new JSONObject(jsonPayload.toString());
             this.username = jsonData.getString("username");
             this.password = jsonData.getString("password");
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("json 형식 에러");
         }
     }
 }
