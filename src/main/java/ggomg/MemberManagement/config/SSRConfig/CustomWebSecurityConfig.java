@@ -40,7 +40,7 @@ public class CustomWebSecurityConfig {
                 .addFilterAfter(new CheckDisabledUserFilter(disableMemberRepository), SecurityContextHolderFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/static/**", "/oauth2/**", "/login/**", "/register/**", "/normal/**",
+                        .requestMatchers("/", "/css/**", "/js/**", "/oauth2/**", "/login/**", "/register/**", "/normal/**",
                                 "/error/**", "/images/**", "/console/**", "/favicon.ico/**")
                         .permitAll()
                         .anyRequest().authenticated()
