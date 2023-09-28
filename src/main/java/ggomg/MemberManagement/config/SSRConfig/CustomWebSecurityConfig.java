@@ -34,19 +34,14 @@ public class CustomWebSecurityConfig {
     private final DisableMemberRepository disableMemberRepository;
 
     @Bean
-    public WebSecurityCustomizer ignoringCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-    }
-
-    @Bean
     @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .addFilterAfter(new CheckDisabledUserFilter(disableMemberRepository), SecurityContextHolderFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/oauth2/**", "/login/**", "/register/**", "/normal/**", "/error/**"
-                                , "/images/**", "/console/**", "/favicon.ico/**")
+                        .requestMatchers("/", "/static/**", "/oauth2/**", "/login/**", "/register/**", "/normal/**",
+                                "/error/**", "/images/**", "/console/**", "/favicon.ico/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
