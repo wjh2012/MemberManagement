@@ -4,12 +4,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import org.json.JSONObject;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private String username;
     private String password;
+
+    public JSONUsernamePasswordAuthenticationFilter() {
+        this.setFilterProcessesUrl("/api/login");
+        ProviderManager providerManager = new ProviderManager();
+    }
 
     @Override
     protected String obtainPassword(HttpServletRequest request) {
