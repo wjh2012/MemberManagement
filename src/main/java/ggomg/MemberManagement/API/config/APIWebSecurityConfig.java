@@ -1,6 +1,5 @@
 package ggomg.MemberManagement.API.config;
 
-import ggomg.MemberManagement.security.LocalUser.CustomUserDetailsService;
 import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -8,20 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -32,7 +22,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 public class APIWebSecurityConfig {
 
-    private final APIAuthenticationSuccessHandler apiAuthenticationSuccessHandler;
+    private final APILoginSuccessHandler apiLoginSuccessHandler;
+    private final APILogoutSuccessHandler apiLogoutSuccessHandler;
 
     @Bean
     @Order(1)
@@ -47,7 +38,14 @@ public class APIWebSecurityConfig {
                         .permitAll())
                 .formLogin(form->form
                         .loginProcessingUrl("/api/login")
-                        .successHandler(apiAuthenticationSuccessHandler)
+                        .successHandler(apiLoginSuccessHandler)
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+                        .deleteCookies("SESSION")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .logoutSuccessHandler(apiLogoutSuccessHandler)
                 )
 
         ;
