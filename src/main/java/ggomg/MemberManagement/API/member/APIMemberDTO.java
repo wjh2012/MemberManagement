@@ -12,7 +12,7 @@ public class APIMemberDTO {
 
     public APIMemberDTO(Long id, String nickname, String username) {
         this.id=id;
-        this.name=name;
+        this.name=nickname;
         this.username=username;
         this.email = "tmp@tmp.com";
     }
