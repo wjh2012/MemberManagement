@@ -82,7 +82,7 @@ public class MemberService {
                         memberSearchRequest.getOffsetPagingRequest().getPage() - 1,
                         memberSearchRequest.getOffsetPagingRequest().getPageSize()
                 );
-        return memberRepository.MemberSearchWithPage(memberSearchCondition, pageRequest);
+        return memberRepository.memberSearchWithPage(memberSearchCondition, pageRequest);
     }
 
 }

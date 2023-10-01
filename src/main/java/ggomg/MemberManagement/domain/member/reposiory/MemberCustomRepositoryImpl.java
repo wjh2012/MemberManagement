@@ -23,7 +23,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     private final JPAQueryFactory query;
 
     @Override
-    public Page<Member> MemberSearchWithPage(MemberSearchCondition memberSearchCondition, Pageable pageable) {
+    public Page<Member> memberSearchWithPage(MemberSearchCondition memberSearchCondition, Pageable pageable) {
         List<Member> members = query
                 .select(member)
                 .from(member)

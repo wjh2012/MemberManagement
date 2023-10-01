@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface MemberCustomRepository {
 
-    Page<Member> MemberSearchWithPage(MemberSearchCondition memberSearchCondition, Pageable pageable);
+    Page<Member> memberSearchWithPage(MemberSearchCondition memberSearchCondition, Pageable pageable);
 
 }
