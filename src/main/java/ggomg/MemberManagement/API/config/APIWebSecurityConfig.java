@@ -1,5 +1,6 @@
 package ggomg.MemberManagement.API.config;
 
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,6 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class APIWebSecurityConfig {
 
     private final APILoginSuccessHandler apiLoginSuccessHandler;
+    private final APILoginFailureHandler apiLoginFailureHandler;
     private final APILogoutSuccessHandler apiLogoutSuccessHandler;
 
     @Bean
@@ -31,14 +35,24 @@ public class APIWebSecurityConfig {
 
         http
                 .securityMatcher("/api/**")
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                            PrintWriter writer = response.getWriter();
+                            writer.flush();
+                        }))
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login/**")
-                        .permitAll())
-                .formLogin(form->form
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
+                .formLogin(form -> form
                         .loginProcessingUrl("/api/login")
                         .successHandler(apiLoginSuccessHandler)
+                        .failureHandler(apiLoginFailureHandler)
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
