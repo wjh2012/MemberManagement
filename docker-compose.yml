@@ -22,6 +22,7 @@ services:
     image: ggomg/mysite:latest
     ports:
       - 80:8080
+      - 443:8080
     depends_on:
       - member_management_db
     restart: on-failure
