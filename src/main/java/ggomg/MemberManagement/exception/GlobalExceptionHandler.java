@@ -13,12 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RegistrationException.class)
-    public String handleRegistrationException(RegistrationException e, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errorCode", e.getErrorCode().getCode());
-        return "redirect:/register/local?error=true";
-    }
-
     @ExceptionHandler(AuthorityException.class)
     public ResponseEntity<?> handleAuthorityException(AuthorityException e) {
         return ResponseEntity.badRequest().body(e.getMessage());

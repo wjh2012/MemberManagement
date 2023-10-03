@@ -45,7 +45,7 @@ public class APIWebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login/**")
+                        .requestMatchers("/api/login/**","/api/register/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

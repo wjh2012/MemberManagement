@@ -1,5 +1,6 @@
 package ggomg.MemberManagement.API.member;
 
+import ggomg.MemberManagement.domain.login_register.LocalMemberRegisterRequest;
 import ggomg.MemberManagement.domain.member.Member;
 import ggomg.MemberManagement.domain.member.reposiory.MemberRepository;
 import lombok.RequiredArgsConstructor;
