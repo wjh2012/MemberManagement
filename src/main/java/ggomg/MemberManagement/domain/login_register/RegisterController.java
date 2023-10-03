@@ -1,6 +1,7 @@
 package ggomg.MemberManagement.domain.login_register;
 
 import ggomg.MemberManagement.domain.member.MemberService;
+import ggomg.MemberManagement.exception.RegistrationException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,4 +40,9 @@ public class RegisterController {
         return "redirect:/register/local?error=true";
     }
 
+    @ExceptionHandler(RegistrationException.class)
+    public String handleRegistrationException(RegistrationException e, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("errorCode", e.getErrorCode().getCode());
+        return "redirect:/register/local?error=true";
+    }
 }
